@@ -1,0 +1,80 @@
+﻿@model FM.Portal.Core.Model.Events
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Attachment attachment = (Attachment)ViewBag.video;
+}
+@section BodySection{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Home")">خانه</a></li>
+            <li class="breadcrumb-item"><a href="@Url.RouteUrl("Events")">رویدادها</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </nav>
+    <article class="card">
+        <div class="card-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">کد رویداد : </label> <label class="control-label">@Model.TrackingCode</label> -
+                        <label class="control-label">تاریخ انتشار :</label> <label class="control-label">@FM.Portal.Core.Common.Helper.GetPersianDay(Model.CreationDate) - @FM.Portal.Core.Common.Helper.GetPersianMonthName(FM.Portal.Core.Common.Helper.GetPersianMonth(Model.CreationDate)) - @FM.Portal.Core.Common.Helper.GetPersianYear(Model.CreationDate)</label>
+                        <label class="control-label pull-left">
+                            <i class="fa fa-clock-o"></i>
+                            <span>تخمین مدت زمان مطالعه رویداد: </span>
+                            <span>@Model.ReadingTime</span>
+                        </label>
+                    </div>
+                    <div class="col-md-12"><h4 class="card-title">@Model.Title</h4></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-light text-justify" role="alert">
+                <div class="alert-heading">
+                    <p>@Model.Description</p>
+                </div>
+                <hr />
+                <p class="mb-0 text-dark">@Html.Raw(Model.Body)</p>
+            </div>
+            @if (attachment.FileName != string.Empty && attachment.FileName != null)
+            {
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="~/Content/TemporaryFiles/@attachment.Path/@attachment.FileName" allowfullscreen></iframe>
+                </div>
+            }
+        </div>
+        @if (Model.Tags != null && Model.Tags.Count > 0)
+        {
+            <div class="card-footer">
+                <label>برچسب ها :</label>
+                @{
+                    var lastitem = Model.Tags.Last();
+                    foreach (var item in Model.Tags)
+                    {
+                        if (item != lastitem)
+                        {
+                            <a href="@Url.RouteUrl("Tag",new { Name= item.Replace(" ", "_")})">@item</a> @:|
+                        }
+                        else
+                        {
+                            <a href="@Url.RouteUrl("Tag",new { Name= item.Replace(" ", "_")})">@item</a>
+                        }
+
+                    }
+                }
+            </div>
+        }
+    </article>
+    <section class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <i class="fa fa-comments-o"></i>
+                دیدگاه ها
+            </h5>
+            <div class="card-body">
+                @Html.Action("Index", "Comment", new { DocumentID = Model.ID, State = "Events" })
+            </div>
+        </div>
+    </section>
+}

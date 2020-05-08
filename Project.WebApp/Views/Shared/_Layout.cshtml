@@ -1,0 +1,49 @@
+﻿<!doctype html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    @RenderSection("Metatag", false)
+    @Styles.Render("~/bundles/bootstrap4")
+    @Styles.Render("~/bundles/main")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/mainSite")
+    @Scripts.Render("~/bundles/bootstrap4js")
+    <script src="~/scripts/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="~/scripts/custom/ajaxcart.js"></script>
+    @RenderSection("Head", false)
+</head>
+
+<body dir="rtl">
+    <div class="container-fluid">
+        <header class="sticky-top py-1">
+            @{Html.RenderAction("RenderMenu", "Home"); }
+        </header>
+        @RenderSection("BannerSection", false)
+
+    <main role="main">
+        @RenderSection("BodySection", false)
+        @RenderBody()
+    </main>
+    </div>
+    @Html.Partial("_PartialFooter")
+
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-submenu .show').removeClass("show");
+            });
+            return false;
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

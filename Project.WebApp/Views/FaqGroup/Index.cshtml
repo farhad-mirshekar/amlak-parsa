@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<FM.Portal.Core.Model.FaqGroupListVM>
+@section bannerSection{
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <img src="~/Content/img/faq.png" class="" />
+        </div>
+    </div>
+
+}
+@section bodySection{
+    <div class="card mt-4">
+        <div class="card-header">
+            <span class="card-title">
+                <i class="fa fa-search"></i>
+                پرسش های متداول
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="row ">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 select" data-value="@item.ID">
+                            <ul class="list-group">
+                                <li class="list-group-item faq-item">
+                                    <span class="mb-3">@item.Title</span>
+                                    <span class="badge badge-light pull-left">@item.Total</span>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        (() => {
+            var select = $('.select');
+            select.each(function (index) {
+                var $this = $(this);
+                $this.on('click', function () {
+                    var value = $this.data('value');
+                    window.location.href = `/faq/${value}`;
+                })
+            })
+        })();
+    </script>
+}

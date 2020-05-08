@@ -1,0 +1,237 @@
+﻿input {
+    direction: rtl;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+p > span {
+    font-family: yekannumbers, IRANSans !important;
+    color: #343a40 !important;
+    font-size: 15px !important;
+}
+
+@font-face {
+    font-family: "IRANSansBold";
+    font-style: normal;
+    font-weight: bold;
+    font-display: auto;
+    src: url('../fonts/eot/IRANSansWeb_Bold.eot');
+    src: url('../fonts/eot/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/woff2/IRANSansWeb_Bold.woff2') format('woff2'), url('../fonts/woff/IRANSansWeb_Bold.woff') format('woff'), url('../fonts/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: "IRANSansMedium";
+    font-style: normal;
+    font-weight: 500;
+    font-display: auto;
+    src: url('../fontseot/IRANSansWeb_Medium.eot');
+    src: url('../fontseot/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/woff2/IRANSansWeb_Medium.woff2') format('woff2'), url('../fonts/woff/IRANSansWeb_Medium.woff') format('woff'), url('../fonts/ttf/IRANSansWeb_Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "IRANSansLight";
+    font-style: normal;
+    font-weight: 300;
+    font-display: auto;
+    src: url('../fonts/eot/IRANSansWeb_Light.eot');
+    src: url('../fonts/eot/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'), url('../fonts/woff2/IRANSansWeb_Light.woff2') format('woff2'), url('../fonts/woff/IRANSansWeb_Light.woff') format('woff'), url('../fonts/ttf/IRANSansWeb_Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "IRANSansUltraLight";
+    font-style: normal;
+    font-weight: 200;
+    font-display: auto;
+    src: url('../fonts/eot/IRANSansWeb_UltraLight.eot');
+    src: url('../fonts/eot/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'), url('../fonts/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'), url('../fonts/woff/IRANSansWeb_UltraLight.woff') format('woff'), url('../fonts/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    font-display: auto;
+    src: url('../fonts/eot/IRANSansWeb.eot');
+    src: url('../fonts/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'), url('../fonts/woff2/IRANSansWeb.woff2') format('woff2'), url('../fonts/woff/IRANSansWeb.woff') format('woff'), url('../fonts/ttf/IRANSansWeb.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'yekannumbers';
+    src: url('../fonts/numbers/yekannumbers-regular.ttf') format('truetype');
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: yekannumbers, IRANSans !important;
+    font-size: 15px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu a::after {
+        transform: rotate(90deg);
+        position: absolute;
+        top: .8em;
+        left: 20px;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        right: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
+
+.card-body label {
+    color: #99a0ac;
+}
+
+.card-body input {
+    color: #636465;
+    font-size: 15px;
+    border-color: rgba(135, 150, 165, .40);
+    border-width: 1px;
+    border-radius: .25rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+li.list-group-item > a:hover {
+    text-decoration: none;
+}
+
+.alert-light hr {
+    border-top-color: #99a0ac !important;
+}
+
+.card-footer {
+    border: 0px !important;
+}
+
+ul.navbar-nav > li.nav-item {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: rgba(135, 150, 165, .40);
+}
+
+    footer > div.row > div.col-md-6 > a > i {
+        font-size: 24px !important;
+    }
+/**************************Start Css Comment**********************/
+ul#tree li {
+    list-style: none;
+}
+
+.comment-container {
+    margin: 10px;
+    padding: 0;
+    text-align: right;
+}
+
+div.comment-container li {
+    list-style-type: none;
+}
+/**************************End Css Comment**********************/
+/**************************Start Css Product********************/
+#product-description {
+}
+
+    #product-description > p {
+        margin-top:30px;
+        font-size:20px;
+        color:red;
+    }
+
+    #product-description > ul {
+        list-style-type: circle;
+        line-height: 30px;
+    }
+.c-params__list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 70px;
+}
+
+    .c-params__list li {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin: 8px -8px;
+    }
+
+.c-params__list-key, .c-params__list-value {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+    .c-params__list-key .block, .c-params__list-value .block {
+        display: block;
+        background: #fafafa;
+        padding: 14px 18px 12px;
+        font-size: 14px;
+        line-height: 1.692;
+        color: #000000;
+        letter-spacing: -.3px;
+        min-height: 47px;
+        position: relative;
+    }
+#fullDesc {
+    margin-top: 15px;
+}
+
+    #fullDesc > p {
+        padding: 5px 30px;
+        line-height: 30px;
+    }
+
+    #fullDesc > ul {
+        font-size: 20px;
+        list-style: none;
+    }
+
+    #fullDesc > blockquote p {
+        font-size: 14px;
+        padding: 5px 30px;
+        line-height: 30px;
+    }
+/**************************End Css Product**********************/
+/**************************Start Css Faq**********************/
+.faq-item {
+    background-color: rgba(135, 150, 165, .25);
+    cursor: pointer;
+}
+.faq-item:hover {
+    background-color: rgba(135, 150, 165, .40);
+    cursor:pointer;
+}
+.faq-item > span{
+    color:blue;
+    font-size:16px;
+}
+/**************************End Css Faq**********************/
+#load {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9999;
+    background: url("../../Areas/Admin/Content/img/loading.gif") no-repeat center center rgba(0,0,0,0.25)
+}

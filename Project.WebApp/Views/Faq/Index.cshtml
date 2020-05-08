@@ -1,0 +1,44 @@
+﻿@model List<FM.Portal.Core.Model.FAQ>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section bannerSection{
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <img src="~/Content/img/faq.png" class="" />
+        </div>
+    </div>
+}
+@section bodySection{
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <section class="card">
+                <div class="card-body">
+
+                    <div class="form-group" id="accordion">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="card pb-2">
+                                <div class="card-header" data-target="#@item.ID" aria-controls="@item.ID" aria-expanded="false" data-parent="#accordion" data-toggle="collapse">
+                                    <h5 class="mb-0">
+                                        <i class="fa fa-question text-info"></i>
+                                        @item.Question
+                                    </h5>
+                                </div>
+                                <div id="@item.ID" class="collapse" aria-labelledby="@item.ID" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p class="text-justify">@item.Answer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+}
+

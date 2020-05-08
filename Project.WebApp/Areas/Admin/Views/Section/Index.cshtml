@@ -1,0 +1,31 @@
+﻿<section ng-show="state === 'cartable'">
+    <button class="btn btn-success btn-circle pull-left" ng-click="main.changeState.add();"><i class="fa fa-plus"></i></button>
+    <h2 class="main-title">کارتابل تقسیمات کشوری</h2>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label class="control-label">انتخاب استان</label>
+            <select class="form-control" ng-model="Model.ProvinceType" ng-change="ProvinceChange();">
+                <option ng-repeat="row in ProvinceDropDown" ng-value="row.Model">{{row.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <portal-grid obj="grid"></portal-grid>
+</section>
+<section ng-show="['add','edit'].indexOf(state) !== -1">
+    <h2 class="main-title" ng-show="state === 'add'">افزودن شهرستان</h2>
+    <h2 class="main-title" ng-show="state === 'edit'">ویرایش شهرستان</h2>
+    <div class="card-body">
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="control-label">نام</label>
+                <input type="text" class="form-control" ng-model="Model.Name" />
+            </div>
+        </div>
+    </div>
+    <div class="btn-group-justified pull-left mb-5">
+        <button type="submit" ng-click="addSection()" ng-show="state==='add'" class="btn btn-success">ثبت</button>
+        <button type="submit" ng-click="editSection()" ng-show="state==='edit'" class="btn btn-primary">ویرایش</button>
+        <button ng-click="main.changeState.cartable();" class="btn btn-cancel">بازگشت</button>
+    </div>
+</section>
+<toaster-container toaster-options="{'position-class': 'toast-top-center', 'newest-ontop': 'false'}"></toaster-container>

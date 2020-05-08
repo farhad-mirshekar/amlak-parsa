@@ -1,0 +1,87 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <table st-safe-src="obj.items" st-table="displayedItems" class="table table-condensed table-hover th-center td-center">
+                <thead>
+
+                    <tr>
+                        <td colspan="{{obj.columns.length + 2}}">
+                            <div class="container">
+                                <div class="row" ng-class="{'mb-2':obj.items.length < obj.columns.length + 2}">
+                                    <div class="col-md-9">
+                                        <i class="fa fa-refresh float-left mr-3 mt-2" ng-click="obj.getlist();" title="بارگذاری مجدد کارتابل"></i>
+                                        <div class="d-inline-block" st-pagination="" st-items-by-page="obj.pageSize" st-displayed-pages="5">
+                                        </div>
+                                        <label ng-show="obj.items.length > 5 && obj.items.length > obj.pageSize " for="pagination-num" class="float-left d-inline-block mr-2 mt-2">صفحه:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="pull-left custom-select w-27" ng-options="option for option in obj.pageSizeRange"
+                                                ng-model="obj.pageSize"></select>
+                                        <label for="option-num" class="float-right mr-2 mt-2">نمایش:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="obj.globalSearch">
+                        <th colspan="{{ obj.columns.length + 2 }}">
+                            <input st-search="{{obj.searchBy}}"
+                                   st-delay="10"
+                                   class="form-control search-inut"
+                                   placeholder="جستجو در این کارتابل"
+                                   type="text" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="width: 70px">ردیف</th>
+                        <th ng-repeat="row in obj.columns" st-sort="{{row.name}}">{{row.displayName}}</th>
+                        <th>عملیات</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in displayedItems">
+                        <td>{{$index + 1}}</td>
+                        <td ng-repeat="col in obj.columns">{{cellValue(item,col)}}</td>
+                        <td ng-if="obj.actions.length"
+                            ng-style="{ 'width': obj.actions.length * 45 + 1 }"
+                            class="grid-action">
+                            <i ng-repeat="action in obj.actions"
+                               ng-click="action.onclick(item)"
+                               class="{{ action.class }}"
+                               ng-if="obj.checkActionVisibility === undefined || obj.checkActionVisibility(action.name, item)"
+                               title="{{ action.title }}"
+                               aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<div class="modal fade grid-delete" dir="rtl"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="gridDeleteLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" dir="rtl">
+            <div class="modal-header">
+                <h3 class="modal-title">تایید حذف</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                    آیا از حذف <strong class="text-danger">{{displayName}}</strong> اطمینان دارید ؟
+                </p>
+            </div>
+            <div class="modal-footer pull-left">
+                <button class="btn btn-danger" ng-click="obj.confirmRemove()">تایید</button>
+                <button class="btn btn-default" data-dismiss="modal">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>

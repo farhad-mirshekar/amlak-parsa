@@ -1,0 +1,110 @@
+﻿@model List<FM.Portal.Core.Model.MenuVM>
+@using FM.Portal.Core.Common;
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAhora" aria-controls="navbarAhora" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarAhora">
+        <a class="navbar-brand" href="@Url.RouteUrl("Home")">نام فروشگاه شما</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            @RenderMenu(Model)
+        </ul>
+    </div>
+    @if (SQLHelper.CheckGuidNull(User.Identity.Name) != Guid.Empty)
+    {
+        <div class="pull-right mr-5">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        خوش آمدید
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if (User.IsInRole("User"))
+                        {
+                            <a class="dropdown-item" href="/user/home">
+                                <i class="fa fa-arrow-right"></i> ورود به پنل
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            using (Html.BeginForm("SignOut", "Account", FormMethod.Post))
+                            {
+                                <button type="submit" class="dropdown-item" style="cursor:pointer">
+                                    <i class="fa fa-sign-out"></i> خروج
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" href="/admin#">
+                                <i class="fa fa-arrow-right"></i> ورود به پنل
+                            </a>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    }
+</nav>
+
+@helper RenderMenu(List<MenuVM> model)
+{
+    foreach (var item in model)
+    {
+        if (item.Children != null && item.Children.Count > 0)
+        {
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='@Url.RouteUrl(item.Url)' id='@item.ID' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='@item.IconText mr-1'></i>@item.Name</a>
+                @ChildRender(item.Children, item.ID)
+            </li>
+        }
+        else
+        {
+            if (Session["login"] != null && SQLHelper.CheckBoolNull(Session["login"]))
+            {
+                if (item.Url.ToLower() != "login")
+                {
+                    <li class="nav-item">
+                        <a class='nav-link' href='@Url.RouteUrl(item.Url)' id='@item.ID'><i class='@item.IconText mr-1'></i>@item.Name</a>
+                    </li>
+                }
+            }
+            else
+            {
+                if (item.Url.ToLower() == "login")
+                {
+                    <li class="nav-item">
+                        <a class='nav-link' href='@Url.RouteUrl(item.Url,new { returnurl = Request.Url.PathAndQuery },null)' id='@item.ID'><i class='@item.IconText mr-1'></i>@item.Name</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class='nav-link' href='@Url.RouteUrl(item.Url)' id='@item.ID'><i class='@item.IconText mr-1'></i>@item.Name</a>
+                    </li>
+                }
+            }
+
+        }
+    }
+}
+@helper ChildRender(List<MenuVM> child, Guid parent)
+{
+    <ul class='dropdown-menu' aria-labelledby='@parent'>
+        @if (child.Count > 0)
+        {
+            foreach (var item in child)
+            {
+                if (item.Children != null && item.Children.Count > 0)
+                {
+                    <li class='dropdown-submenu'>
+                        <a class='dropdown-item dropdown-toggle' href='@Url.RouteUrl(item.Url)'><i class='@item.IconText mr-1'></i>&nbsp;@item.Name</a>";
+                        @ChildRender(item.Children, item.ID);
+                    </li>
+                }
+                else
+                {
+                    <li><a class='dropdown-item' href='@Url.RouteUrl(item.Url)'><i class='@item.IconText mr-1'></i>@item.Name</a></li>
+                }
+            }
+        }
+    </ul>
+}

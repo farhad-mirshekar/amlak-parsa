@@ -1,0 +1,18 @@
+USE [Amlak-Parsa]
+GO
+IF EXISTS(SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spGetProduct'))
+	DROP PROCEDURE app.spGetProduct
+GO
+
+CREATE PROCEDURE app.spGetProduct
+@ID UNIQUEIDENTIFIER
+--WITH ENCRYPTION
+AS
+BEGIN
+	SELECT 
+		*
+	FROM	
+		[app].[Product] 
+	WHERE 
+		ID = @ID
+END
