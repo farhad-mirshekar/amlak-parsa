@@ -712,14 +712,14 @@
         }
         function edit(model) {
             model.Errors = [];
-            if (!model.Name)
-                model.Errors.push('نام را وارد نمایید');
-            if (!model.ShortDescription)
-                model.Errors.push('توضیحات کوتاه را وارد نمایید');
-            if (!model.FullDescription)
-                model.Errors.push('بررسی تخصصی محصول را وارد نمایید');
-            if (!model.Price || model.Price === 0)
-                model.Errors.push('مبلغ را وارد نمایید');
+            //if (!model.Name)
+            //    model.Errors.push('نام را وارد نمایید');
+            //if (!model.ShortDescription)
+            //    model.Errors.push('توضیحات کوتاه را وارد نمایید');
+            //if (!model.FullDescription)
+            //    model.Errors.push('بررسی تخصصی محصول را وارد نمایید');
+            //if (!model.Price || model.Price === 0)
+            //    model.Errors.push('مبلغ را وارد نمایید');
             //if (model.HasDiscount === true) {
             //    if (!model.DiscountType)
             //        model.Errors.push('نوع تخفیف را مشخص نمایید');

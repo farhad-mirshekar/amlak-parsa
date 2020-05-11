@@ -760,53 +760,92 @@
             product.attachment.listPicUploaded = [];
         }
         function addProduct() {
-            //loadingService.show();
-            //return $q.resolve().then(() => {
-            //    return productService.add(product.Model);
-            //}).then((result) => {
-            //    product.Model = result;
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return productService.add(product.Model);
+            }).then((result) => {
+                product.Model = result;
 
-            //    if (product.pic.list.length) {
-            //        product.pics = [];
-            //        if (product.attachment.listPicUploaded && product.attachment.listPicUploaded.length === 0) {
-            //            product.pics.push({ ParentID: product.Model.ID, Type: 1, FileName: product.pic.list[0], PathType: product.pic.type });
-            //            for (var i = 1; i < product.pic.list.length; i++) {
-            //                product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
-            //            }
-            //        } else {
-            //            for (var i = 0; i < product.pic.list.length; i++) {
-            //                product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
-            //            }
-            //        }
-            //        return attachmentService.add(product.pics);
-            //    }
-            //    return true;
-            //}).then((result) => {
-            //    toaster.pop('success', '', 'آگهی جدید با موفقیت اضافه گردید');
-            //    loadingService.hide();
-            //    product.grid.getlist();
-            //    product.attachment.reset();
-            //    product.main.changeState.cartable();
-            //}).catch((error) => {
-            //    loadingService.hide();
-            //    if (!error) {
-            //        $('#content > div').animate({
-            //            scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
-            //        }, 'slow');
-            //    } else {
-            //        var listError = error.split('&&');
-            //        product.Model.Errors = [].concat(listError);
-            //        $('#content > div').animate({
-            //            scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
-            //        }, 'slow');
-            //    }
-
-            //    toaster.pop('error', '', 'خطایی اتفاق افتاده است');
-            //}).finally(loadingService.hide);
-            product.attachment.reset();
+                if (product.pic.list.length) {
+                    product.pics = [];
+                    if (product.attachment.listPicUploaded && product.attachment.listPicUploaded.length === 0) {
+                        product.pics.push({ ParentID: product.Model.ID, Type: 1, FileName: product.pic.list[0], PathType: product.pic.type });
+                        for (var i = 1; i < product.pic.list.length; i++) {
+                            product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+                        }
+                    } else {
+                        for (var i = 0; i < product.pic.list.length; i++) {
+                            product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+                        }
+                    }
+                    return attachmentService.add(product.pics);
+                }
+                return true;
+            }).then((result) => {
+                toaster.pop('success', '', 'آگهی جدید با موفقیت اضافه گردید');
+                loadingService.hide();
+                product.grid.getlist();
+                product.attachment.reset();
+                product.main.changeState.cartable();
+            }).catch((error) => {
+                loadingService.hide();
+                if (!error) {
+                    $('#content > div').animate({
+                        scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+                    }, 'slow');
+                } else {
+                    var listError = error.split('&&');
+                    product.Model.Errors = [].concat(listError);
+                    $('#content > div').animate({
+                        scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+                    }, 'slow');
+                }
+                toaster.pop('error', '', 'خطایی اتفاق افتاده است');
+            }).finally(loadingService.hide);
         }
         function editProduct() {
-            angular.element('.filepond--list').remove();
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return productService.edit(product.Model);
+            }).then((result) => {
+                product.Model = result;
+
+                if (product.pic.list.length) {
+                    product.pics = [];
+                    if (product.attachment.listPicUploaded && product.attachment.listPicUploaded.length === 0) {
+                        product.pics.push({ ParentID: product.Model.ID, Type: 1, FileName: product.pic.list[0], PathType: product.pic.type });
+                        for (var i = 1; i < product.pic.list.length; i++) {
+                            product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+                        }
+                    } else {
+                        for (var i = 0; i < product.pic.list.length; i++) {
+                            product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+                        }
+                    }
+                    return attachmentService.add(product.pics);
+                }
+                return true;
+            }).then((result) => {
+                toaster.pop('success', '', 'آگهی با موفقیت ویرایش گردید');
+                loadingService.hide();
+                product.grid.getlist();
+                product.attachment.reset();
+                product.main.changeState.cartable();
+            }).catch((error) => {
+                loadingService.hide();
+                if (!error) {
+                    $('#content > div').animate({
+                        scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+                    }, 'slow');
+                } else {
+                    var listError = error.split('&&');
+                    product.Model.Errors = [].concat(listError);
+                    $('#content > div').animate({
+                        scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+                    }, 'slow');
+                }
+                toaster.pop('error', '', 'خطایی اتفاق افتاده است');
+            }).finally(loadingService.hide);
         }
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
         }
         return directive;
         function link(scope, element, $event) {
-            let file, tempFileName;
+            let file;
             scope.tempListFile=[];
             scope.selectFile = selectFile;
             scope.remove = remove;
@@ -56,7 +56,6 @@
 
             function selectFile() {
                 file = element.find("input[type='file']").get(0).files[0];
-                //scope.fileName = file.name;
                 scope.fileSelected = true; //**state
                 scope.$apply();
             }
@@ -99,7 +98,8 @@
                 return $q.resolve().then(() => {
                     var index = scope.tempListFile.indexOf(item);
                     scope.tempListFile.splice(index, 1);
-                    return attachmentService.remove({ FileName: item.FileName, PathType : '6'});
+                    scope.pic.list.splice(index, 1);
+                    return attachmentService.remove({ FileName: item.FileName, PathType: scope.pic.type });
                 }).catch(() => {
                     loadingService.hide();
                 }).finally(loadingService.hide);
@@ -114,10 +114,11 @@
                         const formData = new FormData();
                         formData.append(file.name, file, file.name);
                         scope.uploading = true; // rename to state // **state
-                        return uploadService.upload({ type: '6', data: formData });
+                        return uploadService.upload({ type: scope.pic.type, data: formData });
                     }
                 }).then((result) => {
                     scope.tempListFile.push(result);
+                    scope.pic.list.push(result.FileName);
                 })
                     .finally(loadingService.hide);
             }

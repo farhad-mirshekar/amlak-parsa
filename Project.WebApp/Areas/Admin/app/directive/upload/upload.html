@@ -7,8 +7,8 @@
             <div class="col-md-12" ng-if="(pic.allowMultiple === false && main.listPicUploaded.length === 0) || pic.allowMultiple">
                 <div class="upload-text">
                     <input type="file" style="display:none" id="file" name='file' onchange="angular.element(this).scope().selectFile(event)" />
-                    <button type="button" class="btn btn-primary" ng-click="browse()"><span class="glyphicon glyphicon-folder-open"></span>انتخاب فایل</button>
-                    <button type="button" class="btn btn-success" ng-click="upload()"><span class="glyphicon glyphicon-cloud-upload"></span>بارگذاری</button>
+                    <button type="button" class="btn btn-primary" ng-click="browse()"><i class="fa fa-folder-open mr-1"></i>انتخاب فایل</button>
+                    <button type="button" class="btn btn-success" ng-click="upload()" ng-disabled="!fileSelected || uploading"><i class="fa fa-cloud-upload mr-1"></i>بارگذاری</button>
                 </div>
             </div>
             <div class="col-md-12 mt-3" ng-show="tempListFile.length > 0">
