@@ -57,6 +57,7 @@
             function selectFile() {
                 file = element.find("input[type='file']").get(0).files[0];
                 scope.fileSelected = true; //**state
+                scope.uploading = false;
                 scope.$apply();
             }
             function init() {
@@ -114,6 +115,7 @@
                         const formData = new FormData();
                         formData.append(file.name, file, file.name);
                         scope.uploading = true; // rename to state // **state
+                        scope.fileSelected = false;
                         return uploadService.upload({ type: scope.pic.type, data: formData });
                     }
                 }).then((result) => {

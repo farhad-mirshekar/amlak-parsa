@@ -382,6 +382,12 @@
     <Content Include="Content\main\main.css" />
     <Content Include="Content\main\PagedList.css" />
     <Content Include="Content\main\Site.css" />
+    <Content Include="Content\TemporaryFiles\product\0465c0d7-e276-4beb-8214-2e367fcc72a1.jpg" />
+    <Content Include="Content\TemporaryFiles\product\2fd50fab-993d-4702-8a88-debc361ce807.jpg" />
+    <Content Include="Content\TemporaryFiles\product\6d14982f-ea80-4ed3-a91b-7bb22a5a2467.jpg" />
+    <Content Include="Content\TemporaryFiles\product\9276fa78-dc1e-4921-bff1-59a6a1bd7161.jpg" />
+    <Content Include="Content\TemporaryFiles\product\9c5c24d2-d03c-4406-8d05-b44347e8b4de.jpg" />
+    <Content Include="Content\TemporaryFiles\product\f6d8db55-e309-43ad-98c5-37a0a654d1cd.jpg" />
     <Content Include="Content\toaster\toaster.css" />
     <Content Include="Content\toaster\toaster.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -1738,7 +1744,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\TemporaryFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
