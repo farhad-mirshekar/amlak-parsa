@@ -76,6 +76,7 @@
     <Compile Include="App\FAQ\FAQ.cs" />
     <Compile Include="App\Product\Product.cs" />
     <Compile Include="App\Product\VM\ProductListVM.cs" />
+    <Compile Include="App\Product\VM\ShowProductOnHomePageListVM.cs" />
     <Compile Include="App\Section\Section.cs" />
     <Compile Include="App\Section\VM\SectionListVM.cs" />
     <Compile Include="Entity.cs" />

@@ -45,6 +45,14 @@ namespace FM.Portal.Domain
             return Result<List<Product>>.Failure();
         }
 
+        public Result<List<ShowProductOnHomePageListVM>> ListForWeb(ProductListVM listVM, int Count)
+        {
+            var table = ConvertDataTableToList.BindList<ShowProductOnHomePageListVM>(_dataSource.ListForWeb(listVM,Count));
+            if (table.Count > 0 || table.Count == 0)
+                return Result<List<ShowProductOnHomePageListVM>>.Successful(data: table);
+            return Result<List<ShowProductOnHomePageListVM>>.Failure();
+        }
+
         private Result ValidationModel(Product model)
         {
             List<string> Errors = new List<string>();

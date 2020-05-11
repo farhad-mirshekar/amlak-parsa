@@ -11,5 +11,6 @@ namespace FM.Portal.DataSource
         Result<Product> Update(Product model);
         Result<Product> Get(Guid ID);
         DataTable List(ProductListVM listVM);
+        DataTable ListForWeb(ProductListVM listVM, int? Count);
     }
 }

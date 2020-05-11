@@ -18,7 +18,7 @@ namespace Project.WebApp.Controllers
             ViewBag.Title = $"جست و جو برچسب - {Name}";
             int pageSize = 2;
             int pageNumber = (page ?? 1);
-            var result =_service.SearchByName(Name);
+            var result =_service.SearchByName(Name.Replace('_',' '));
             if(!result.Success)
             {
                 var error = new Error() {ClassCss="alert alert-info" , ErorrDescription="خطا در بازیابی داده" };

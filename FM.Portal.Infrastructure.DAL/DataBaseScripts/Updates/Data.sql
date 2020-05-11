@@ -142,3 +142,6 @@ INSERT [pbl].[GeneralSetting] ([Name], [Value]) VALUES (N'SiteName', N'')
 GO
 INSERT [pbl].[GeneralSetting] ([Name], [Value]) VALUES (N'CountShowEvents', N'')
 GO
+INSERT INTO ptl.Category
+VALUES
+(NEWID(),N'بازار مسکن',null,1,1,0,GETDATE())

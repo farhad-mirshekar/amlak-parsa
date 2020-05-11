@@ -1,6 +1,7 @@
 ﻿using FM.Portal.Core.Common;
 using FM.Portal.Core.Service;
 using FM.Portal.FrameWork.MVC.Controller;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Project.WebApp.Controllers
@@ -37,16 +38,20 @@ namespace Project.WebApp.Controllers
 
         #region ChildAction
         [ChildActionOnly]
-        public virtual ActionResult TrendingProduct()
+        public virtual ActionResult HomeProduct()
         {
-            //var result = _service.ListProductShowOnHomePage(Helper.CountShowProduct);
-            return PartialView("_PartialTrendingProduct", null);
+            var result = _service.ListForWeb(new FM.Portal.Core.Model.ProductListVM {ProductType = FM.Portal.Core.Model.ProductType.خانه }, Helper.CountShowProduct);
+            if (!result.Success)
+                return null;
+            return PartialView("_PartialHomeProduct", result.Data);
         }
         [ChildActionOnly]
-        public virtual ActionResult SaleProduct()
+        public virtual ActionResult ShopProduct()
         {
-            //var result = _service.ListProductShowOnHomePage(Helper.CountShowProduct);
-            return PartialView("_PartialSaleProduct", null);
+            var result = _service.ListForWeb(new FM.Portal.Core.Model.ProductListVM { ProductType = FM.Portal.Core.Model.ProductType.مغازه }, Helper.CountShowProduct);
+            if (!result.Success)
+                return null;
+            return PartialView("_PartialShopProduct", result.Data);
         }
 
         [ChildActionOnly]

@@ -75,7 +75,7 @@ namespace FM.Portal.Infrastructure.DAL
         {
             try
             {
-                var param = new SqlParameter[5];
+                var param = new SqlParameter[6];
                 param[0] = new SqlParameter("@TrackingCode", listVM.TrackingCode);
 
                 param[1] = new SqlParameter("@Meter", SqlDbType.Int);
@@ -90,7 +90,40 @@ namespace FM.Portal.Infrastructure.DAL
                 param[4] = new SqlParameter("@FloorCoveringType", SqlDbType.TinyInt);
                 param[4].Value = listVM.FloorCoveringType != FloorCoveringType.نامشخص ? (object)listVM.FloorCoveringType : DBNull.Value;
 
+                param[5] = new SqlParameter("@ProductType", SqlDbType.TinyInt);
+                param[5].Value = listVM.ProductType != ProductType.نامشخص ? (object)listVM.ProductType : DBNull.Value;
+
                 return SQLHelper.GetDataTable(CommandType.StoredProcedure, "app.spGetsProduct", param);
+            }
+            catch (Exception e) { throw; }
+        }
+
+        public DataTable ListForWeb(ProductListVM listVM, int? Count)
+        {
+            try
+            {
+                var param = new SqlParameter[7];
+                param[0] = new SqlParameter("@TrackingCode", listVM.TrackingCode);
+
+                param[1] = new SqlParameter("@Meter", SqlDbType.Int);
+                param[1].Value = (object)listVM.Meter ?? DBNull.Value;
+
+                param[2] = new SqlParameter("@OrginalPrice", SqlDbType.Money);
+                param[2].Value = (object)listVM.OrginalPrice ?? DBNull.Value;
+
+                param[3] = new SqlParameter("@DocumentType", SqlDbType.TinyInt);
+                param[3].Value = listVM.DocumentType != DocumentForProductType.نامشخص ? (object)listVM.DocumentType : DBNull.Value;
+
+                param[4] = new SqlParameter("@FloorCoveringType", SqlDbType.TinyInt);
+                param[4].Value = listVM.FloorCoveringType != FloorCoveringType.نامشخص ? (object)listVM.FloorCoveringType : DBNull.Value;
+
+                param[5] = new SqlParameter("@ProductType", SqlDbType.TinyInt);
+                param[5].Value = listVM.ProductType != ProductType.نامشخص ? (object)listVM.ProductType : DBNull.Value;
+
+                param[6] = new SqlParameter("@Count", SqlDbType.Int);
+                param[6].Value = (object)Count ?? DBNull.Value;
+
+                return SQLHelper.GetDataTable(CommandType.StoredProcedure, "app.spGetsProductForHomePage", param);
             }
             catch (Exception e) { throw; }
         }

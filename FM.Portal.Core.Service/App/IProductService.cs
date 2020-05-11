@@ -11,5 +11,6 @@ namespace FM.Portal.Core.Service
         Result<Product> Edit(Product model);
         Result<Product> Get(Guid ID);
         Result<List<Product>> List(ProductListVM listVM);
+        Result<List<ShowProductOnHomePageListVM>> ListForWeb(ProductListVM listVM,int Count);
     }
 }

@@ -1,8 +1,8 @@
-﻿@model List<ListProductShowOnHomePageVM>
+﻿@model List<ShowProductOnHomePageListVM>
 <section class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <span class="card-title">محصولات جدید</span>
+            <span class="card-title">آگهی های مربوط به خانه</span>
         </div>
         <div class="card-body">
             <div class="container">
@@ -11,13 +11,13 @@
                     {
                         <div class="col-md-4">
                             <div class="card">
-                                <img src="~/Content/TemporaryFiles/@Enum.GetName(typeof(PathType), item.PathType)/@item.FileName" alt="@item.Name.Replace(' ', '_')" class="card-img-top img-rounded" />
+                                <img src="~/Content/TemporaryFiles/@Enum.GetName(typeof(PathType), item.PathType)/@item.FileName" alt="@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)" class="card-img-top img-rounded" />
                                 <div class="card-body">
-                                    <h5 class="card-title">@(item.Name.Length > 20 ? item.Name.Substring(0, 19) + " ...." : item.Name)</h5>
+                                    <h5 class="card-title">@(item.Title.Length > 20 ? item.Title.Substring(0, 19) + " ...." : item.Title)</h5>
                                 </div>
                                 <div class="card-footer">
                                     <div class="btn-group-justified" style="float:left">
-                                        <a href="@Url.RouteUrl("product",new { TrackingCode=item.TrackingCode,Title=item.Name.Replace(' ','_').Replace('/','_')})" class="btn btn-outline-primary">مشاهده</a>
+                                        <a href="@Url.RouteUrl("product",new { TrackingCode=item.TrackingCode,Title=@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)})" class="btn btn-outline-primary">مشاهده</a>
                                     </div>
                                 </div>
                             </div>
@@ -28,3 +28,4 @@
         </div>
     </div>
 </section>
+

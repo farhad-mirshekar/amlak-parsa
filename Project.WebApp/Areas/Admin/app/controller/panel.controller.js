@@ -643,16 +643,18 @@
     productController.$inject = ['$scope', '$routeParams', 'loadingService', '$q', 'toaster', '$location', 'productService', 'attachmentService', 'toolsService', 'enumService', 'froalaOption', 'sectionService'];
     function productController($scope, $routeParams, loadingService, $q, toaster, $location, productService, attachmentService, toolsService, enumService, froalaOption, sectionService) {
         var product = $scope;
+
         product.Model = {};
         product.Model.Errors = [];
-
-        product.Search = {};
 
         product.attachment = {};
         product.attachment.listPicUploaded = [];
 
         product.pic = { type: '6', allowMultiple: true };
         product.pic.list = [];
+
+        product.search = {};
+        product.search.Model = {};
 
         product.main = {};
         product.main.changeState = {
@@ -672,17 +674,23 @@
             , globalSearch: true
             , searchBy: 'Title'
             , displayNameFormat: ['Title']
-            , options: () => { return product.Search }
+            , options: () => { return product.search.Model }
         };
         product.SellingProductType = toolsService.arrayEnum(enumService.SellingProductType);
         product.ProductType = toolsService.arrayEnum(enumService.ProductType);
         product.ProvinceType = toolsService.arrayEnum(enumService.ProvinceType);
         product.FloorCoveringType = toolsService.arrayEnum(enumService.FloorCoveringType);
         product.DocumentType = toolsService.arrayEnum(enumService.DocumentForProductType);
+
+        //search
+        product.search.DocumentType = toolsService.arrayEnum(enumService.DocumentForProductType);
+        product.search.FloorCoveringType = toolsService.arrayEnum(enumService.FloorCoveringType);
+
         product.froalaOption = froalaOption.main;
         product.ProvinceChange = ProvinceChange;
         product.addProduct = addProduct;
         product.editProduct = editProduct;
+        product.search.clear = clearSearch;
         init();
         function init() {
             loadingService.show();
@@ -759,6 +767,15 @@
             product.pic.list = [];
             product.attachment.listPicUploaded = [];
         }
+        function clearSearch() {
+            loadingService.show();
+            product.search.Model = {};
+            product.search.searchPanel = false;
+            product.grid.getlist();
+            loadingService.hide();
+        }
+
+
         function addProduct() {
             loadingService.show();
             return $q.resolve().then(() => {
