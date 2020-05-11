@@ -1,6 +1,5 @@
 CREATE TABLE [app].[Product](
 	[ID] [uniqueidentifier] NOT NULL,
-	[ProductID] [uniqueidentifier] NOT NULL,
 	[SectionID] [uniqueidentifier]  NULL,
 	[Meter] [int]  NULL,
 	[OrginalPrice] [money] NULL,

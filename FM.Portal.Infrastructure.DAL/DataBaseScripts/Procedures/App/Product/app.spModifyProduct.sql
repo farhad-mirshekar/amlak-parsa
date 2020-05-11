@@ -37,8 +37,8 @@ BEGIN
 			DECLARE @TrackingCode NVARCHAR(20)
 			SET @TrackingCode = (select STR(FLOOR(RAND(CHECKSUM(NEWID()))*(9999999999-1000000000+1)+1000000000)))
 
-			INSERT INTO [app].[Product] (ID , CountPhone , CountRoom , [Description] , DocumentType , FloorCoveringType , HasElectricity , HasElevator , HasGas , HasPhone , HasWater , Meter , OrginalPrice , PhoneContact , PrePayment , Rent , SectionID , SellingProductType , Title , TrackingCode,UserID,[Enabled] , CreationDate , UpdatedDate)
-			VALUES(@ID , @CountPhone , @CountRoom , @Description , @DocumentType , @FloorCoveringType , @HasElectricity , @HasElevator , @HasGas , @HasPhone , @HasWater , @Meter , @OrginalPrice , @PhoneContact , @PrePayment , @Rent , @SectionID , @SellingProductType , @Title , @TrackingCode,@UserID,@Enabled,GETDATE() , GETDATE())
+			INSERT INTO [app].[Product] (ID , CountPhone , CountRoom , [Description] , DocumentType , FloorCoveringType , HasElectricity , HasElevator , HasGas , HasPhone , HasWater , Meter , OrginalPrice , PhoneContact , PrePayment , Rent , SectionID , SellingProductType , Title , TrackingCode,UserID,[Enabled],ProductType , CreationDate , UpdatedDate)
+			VALUES(@ID , @CountPhone , @CountRoom , @Description , @DocumentType , @FloorCoveringType , @HasElectricity , @HasElevator , @HasGas , @HasPhone , @HasWater , @Meter , @OrginalPrice , @PhoneContact , @PrePayment , @Rent , @SectionID , @SellingProductType , @Title , @TrackingCode,@UserID,@Enabled,@ProductType,GETDATE() , GETDATE())
 		END
 	ELSE -- update
 		BEGIN
@@ -64,6 +64,7 @@ BEGIN
 				,SellingProductType = @SellingProductType
 				,UserID = @UserID
 				,[Enabled] = @Enabled
+				,ProductType = @ProductType
 				,UpdatedDate = GETDATE()
 			WHERE
 				[ID] = @ID

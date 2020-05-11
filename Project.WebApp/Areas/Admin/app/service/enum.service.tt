@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="True" language="C#" #>
-<#@ assembly name="$(ProjectDir)bin\Ahora.WebApp.dll" #>
+<#@ assembly name="$(ProjectDir)bin\Project.WebApp.dll" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Web" #>
 <#@ assembly name="System.IO" #>
@@ -8,7 +8,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Web" #>
 <#@ import namespace="System.IO" #>
-<#@ import namespace="Ahora.WebApp.Tools" #>
+<#@ import namespace="Project.WebApp.Tools" #>
 <#@ output extension=".js" #>
 <#@ assembly name="EnvDTE" #><# /* This assembly provides access to Visual Studio project properties. */ #>
 <#
@@ -16,7 +16,7 @@
     var dte = serviceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
     var solutionDirectory = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
 	List<string> dlls = new List<string>();
-	dlls.Add(solutionDirectory	 + @"\Ahora.WebApp\bin\FM.Portal.Core.Model.dll");
+	dlls.Add(solutionDirectory	 + @"\Project.WebApp\bin\FM.Portal.Core.Model.dll");
 	var str = ModuleGenerator.EnumService("portal", dlls);
 #>
 <#=str#>

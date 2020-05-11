@@ -10,9 +10,14 @@ CREATE PROCEDURE app.spGetProduct
 AS
 BEGIN
 	SELECT 
-		*
+		product.*,
+		section.CountryType,
+		section.ProvinceType,
+		section.Name AS SectionName
 	FROM	
-		[app].[Product] 
+		[app].[Product] product 
+	INNER JOIN 
+		[app].Section section ON product.SectionID = section.ID
 	WHERE 
-		ID = @ID
+		product.ID = @ID
 END

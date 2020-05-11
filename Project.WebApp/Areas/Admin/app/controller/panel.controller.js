@@ -640,11 +640,19 @@
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     app.controller('productController', productController);
-    productController.$inject = ['$scope', '$routeParams', 'loadingService', '$q', 'toaster', '$location', 'categoryService', 'productService', 'attachmentService', 'attributeService', 'productMapattributeService', 'productVariantattributeService', 'discountService', 'toolsService', 'enumService', 'froalaOption'];
-    function productController($scope, $routeParams, loadingService, $q, toaster, $location, categoryService, productService, attachmentService, attributeService, productMapattributeService, productVariantattributeService, discountService, toolsService, enumService, froalaOption) {
+    productController.$inject = ['$scope', '$routeParams', 'loadingService', '$q', 'toaster', '$location', 'productService', 'attachmentService', 'toolsService', 'enumService', 'froalaOption', 'sectionService'];
+    function productController($scope, $routeParams, loadingService, $q, toaster, $location, productService, attachmentService, toolsService, enumService, froalaOption, sectionService) {
         var product = $scope;
         product.Model = {};
         product.Model.Errors = [];
+
+        product.Search = {};
+
+        product.attachment = {};
+        product.attachment.listPicUploaded = [];
+
+        product.pic = { type: '6', allowMultiple: true };
+        product.pic.list = [];
 
         product.main = {};
         product.main.changeState = {
@@ -652,11 +660,29 @@
             edit: edit,
             cartable: cartable
         }
+        product.grid = {
+            bindingObject: product
+            , columns: [{ name: 'Title', displayName: 'عنوان آگهی' },
+            { name: 'ProvinceType', displayName: 'نام استان', type: 'enum', source: enumService.ProvinceType },
+            { name: 'SectionName', displayName: 'نام شهرستان' },
+            { name: 'ProductType', displayName: 'نوع ملک', type: 'enum', source: enumService.ProductType },
+            { name: 'SellingProductType', displayName: 'نوع فروش', type: 'enum', source: enumService.SellingProductType }]
+            , listService: productService.list
+            , onEdit: product.main.changeState.edit
+            , globalSearch: true
+            , searchBy: 'Title'
+            , displayNameFormat: ['Title']
+            , options: () => { return product.Search }
+        };
         product.SellingProductType = toolsService.arrayEnum(enumService.SellingProductType);
         product.ProductType = toolsService.arrayEnum(enumService.ProductType);
         product.ProvinceType = toolsService.arrayEnum(enumService.ProvinceType);
         product.FloorCoveringType = toolsService.arrayEnum(enumService.FloorCoveringType);
         product.DocumentType = toolsService.arrayEnum(enumService.DocumentForProductType);
+        product.froalaOption = froalaOption.main;
+        product.ProvinceChange = ProvinceChange;
+        product.addProduct = addProduct;
+        product.editProduct = editProduct;
         init();
         function init() {
             loadingService.show();
@@ -665,6 +691,13 @@
                     case 'add':
                         product.main.changeState.add();
                         break;
+                    case 'cartable':
+                        product.main.changeState.cartable();
+                        break;
+                    case 'edit':
+                        productService.get($routeParams.id).then((result) => {
+                            product.main.changeState.edit(result);
+                        })
                 }
             }).finally(loadingService.hide)
         }
@@ -672,11 +705,108 @@
             product.state = 'add';
             $location.path('product/add');
         }
-        function edit() {
+        function edit(model) {
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return productService.get(model.ID);
+            }).then((result) => {
+                product.Model = result;
+                return attachmentService.list({ ParentID: product.Model.ID });
+            }).then((result) => {
+                product.attachment.listPicUploaded = [];
+                if (result && result.length > 0) {
+                    for (var i = 0; i < result.length; i++) {
+                        product.attachment.listPicUploaded.push(result[i]);
+                    }
+                }
 
+            }).then(() => {
+                return ProvinceChange();
+            })
+                .then(() => {
+                    product.state = 'edit';
+                    $location.path(`/product/edit/${product.Model.ID}`);
+                })
+                .catch((error) => {
+                loadingService.hide();
+                toaster.pop('error', '', 'خطایی اتفاق افتاده است');
+            }).finally(loadingService.hide);
         }
         function cartable() {
+            loadingService.show();
+            clearModel();
+            product.state = 'cartable';
+            $location.path('product/cartable');
+            loadingService.hide();
+        }
+        function ProvinceChange() {
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return sectionService.list({ ProvinceType: product.Model.ProvinceType });
+            }).then((result) => {
+                if (result.length > 0) {
+                    product.sectionList = [];
+                    for (var i = 0; i < result.length; i++) {
+                        product.sectionList.push({ Model: result[i].ID, Name: result[i].Name });
+                    }
+                }
 
+            }).finally(loadingService.hide);
+        }
+        function clearModel() {
+            product.Model = {};
+            product.Model.Errors = [];
+            product.pic.list = [];
+            product.attachment.listPicUploaded = [];
+        }
+        function addProduct() {
+            //loadingService.show();
+            //return $q.resolve().then(() => {
+            //    return productService.add(product.Model);
+            //}).then((result) => {
+            //    product.Model = result;
+
+            //    if (product.pic.list.length) {
+            //        product.pics = [];
+            //        if (product.attachment.listPicUploaded && product.attachment.listPicUploaded.length === 0) {
+            //            product.pics.push({ ParentID: product.Model.ID, Type: 1, FileName: product.pic.list[0], PathType: product.pic.type });
+            //            for (var i = 1; i < product.pic.list.length; i++) {
+            //                product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+            //            }
+            //        } else {
+            //            for (var i = 0; i < product.pic.list.length; i++) {
+            //                product.pics.push({ ParentID: product.Model.ID, Type: 2, FileName: product.pic.list[i], PathType: product.pic.type });
+            //            }
+            //        }
+            //        return attachmentService.add(product.pics);
+            //    }
+            //    return true;
+            //}).then((result) => {
+            //    toaster.pop('success', '', 'آگهی جدید با موفقیت اضافه گردید');
+            //    loadingService.hide();
+            //    product.grid.getlist();
+            //    product.attachment.reset();
+            //    product.main.changeState.cartable();
+            //}).catch((error) => {
+            //    loadingService.hide();
+            //    if (!error) {
+            //        $('#content > div').animate({
+            //            scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+            //        }, 'slow');
+            //    } else {
+            //        var listError = error.split('&&');
+            //        product.Model.Errors = [].concat(listError);
+            //        $('#content > div').animate({
+            //            scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
+            //        }, 'slow');
+            //    }
+
+            //    toaster.pop('error', '', 'خطایی اتفاق افتاده است');
+            //}).finally(loadingService.hide);
+            product.attachment.reset();
+        }
+        function editProduct() {
+            angular.element('.filepond--list').remove();
         }
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -2621,7 +2751,7 @@
         section.grid = {
             bindingObject: section
             , columns: [{ name: 'Name', displayName: 'نام شهرستان' },
-                { name: 'ProvinceType', displayName: 'نام استان', type: 'enum', source: enumService.ProvinceType }]
+            { name: 'ProvinceType', displayName: 'نام استان', type: 'enum', source: enumService.ProvinceType }]
             , listService: sectionService.list
             , onEdit: section.main.changeState.edit
             , globalSearch: true

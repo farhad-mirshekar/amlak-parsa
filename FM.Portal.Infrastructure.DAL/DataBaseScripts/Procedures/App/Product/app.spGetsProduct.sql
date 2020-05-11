@@ -14,8 +14,14 @@ CREATE PROCEDURE app.spGetsProduct
 AS
 BEGIN
 	SELECT
-		*
-	FROM app.Product
+		product.*,
+		section.Name AS SectionName,
+		section.CountryType,
+		section.ProvinceType
+
+	FROM app.Product product
+	INNER JOIN
+		app.Section section ON product.SectionID = section.ID
 	WHERE
 		(@TrackingCode IS NULL OR TrackingCode = @TrackingCode)
 	AND (@Meter IS NULL OR Meter BETWEEN 0 AND @Meter)

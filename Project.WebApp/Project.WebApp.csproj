@@ -270,6 +270,7 @@
     <Compile Include="Areas\ApiClient\Controllers\app\CommentController.cs" />
     <Compile Include="Areas\ApiClient\Controllers\app\FaqController.cs" />
     <Compile Include="Areas\ApiClient\Controllers\app\FaqGroupController.cs" />
+    <Compile Include="Areas\ApiClient\Controllers\app\ProductController.cs" />
     <Compile Include="Areas\ApiClient\Controllers\app\SectionController.cs" />
     <Compile Include="Areas\ApiClient\Controllers\org\CommandController.cs" />
     <Compile Include="Areas\ApiClient\Controllers\org\DepartmentController.cs" />
@@ -1567,7 +1568,6 @@
     <Content Include="Areas\Admin\Views\Notification\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Pages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Position\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Cartable.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Profile\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
@@ -1576,7 +1576,6 @@
     <Content Include="Areas\Admin\Views\Slider\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Index.cshtml" />
     <None Include="Scripts\jquery\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-3.4.1.js" />

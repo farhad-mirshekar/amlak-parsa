@@ -36,7 +36,7 @@ namespace FM.Portal.Infrastructure.DAL
                             obj.CountPhone = SQLHelper.CheckIntNull(dr["CountPhone"]);
                             obj.CountRoom = SQLHelper.CheckIntNull(dr["CountRoom"]);
                             obj.Description = SQLHelper.CheckStringNull(dr["Description"]);
-                            obj.FloorCoveringType = (FloorCoveringType)SQLHelper.CheckByteNull(dr["FloorCovering"]);
+                            obj.FloorCoveringType = (FloorCoveringType)SQLHelper.CheckByteNull(dr["FloorCoveringType"]);
                             obj.HasElectricity = SQLHelper.CheckBoolNull(dr["HasElectricity"]);
                             obj.HasElevator = SQLHelper.CheckBoolNull(dr["HasElevator"]);
                             obj.HasGas = SQLHelper.CheckBoolNull(dr["HasGas"]);
@@ -50,12 +50,15 @@ namespace FM.Portal.Infrastructure.DAL
                             obj.Rent = SQLHelper.CheckDecimalNull(dr["Rent"]);
                             obj.SectionID = SQLHelper.CheckGuidNull(dr["SectionID"]);
                             obj.Title = SQLHelper.CheckStringNull(dr["Title"]);
-                            obj.DocumentType = (DocumentForProductType)SQLHelper.CheckByteNull(dr["TypeDocumnet"]);
-                            obj.CountryType = (CountryType)SQLHelper.CheckByteNull(dr["CountryID"]);
-                            obj.ProvinceType = (ProvinceType)SQLHelper.CheckByteNull(dr["ProvinceID"]);
+                            obj.DocumentType = (DocumentForProductType)SQLHelper.CheckByteNull(dr["DocumentType"]);
+                            obj.CountryType = (CountryType)SQLHelper.CheckByteNull(dr["CountryType"]);
+                            obj.ProvinceType = (ProvinceType)SQLHelper.CheckByteNull(dr["ProvinceType"]);
                             obj.UserID = SQLHelper.CheckGuidNull(dr["UserID"]);
                             obj.CreationDate = SQLHelper.CheckDateTimeNull(dr["CreationDate"]);
                             obj.UpdatedDate = SQLHelper.CheckDateTimeNull(dr["UpdatedDate"]);
+                            obj.SectionName = SQLHelper.CheckStringNull(dr["SectionName"]);
+                            obj.ProductType = (ProductType)SQLHelper.CheckByteNull(dr["ProductType"]);
+
                         }
                     }
 
@@ -100,7 +103,7 @@ namespace FM.Portal.Infrastructure.DAL
             {
                 using (SqlConnection con = new SqlConnection(SQLHelper.GetConnectionString()))
                 {
-                    SqlParameter[] param = new SqlParameter[21];
+                    SqlParameter[] param = new SqlParameter[23];
                     param[0] = new SqlParameter("@ID", model.ID);
 
                     param[1] = new SqlParameter("@CountPhone", model.CountPhone);
@@ -123,6 +126,8 @@ namespace FM.Portal.Infrastructure.DAL
                     param[18] = new SqlParameter("@SectionID", model.SectionID);
                     param[19] = new SqlParameter("@Title", model.Title);
                     param[20] = new SqlParameter("@UserID",_requestInfo.UserId);
+                    param[21] = new SqlParameter("@ProductType", (byte)model.ProductType);
+                    param[22] = new SqlParameter("@Enabled", model.Enabled);
 
                     int result = SQLHelper.ExecuteNonQuery(con, System.Data.CommandType.StoredProcedure, "app.spModifyProduct", param);
                     if (result > 0)

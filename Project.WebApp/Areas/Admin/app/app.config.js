@@ -10,7 +10,7 @@
             $routeProvider.when("/command/:state/:id?", { templateUrl: "/admin/command/index", controller: 'commandController', reloadOnUrl: false })
                 .when("/role/:state/:id?", { templateUrl: "/admin/role/index", controller: 'roleController', reloadOnUrl: false })
                 .when("/position/:state/:id?", { templateUrl: "/admin/position/index", controller: 'positionController', reloadOnUrl: false })
-                .when("/product/:state/:id?", {templateUrl: "/admin/product/index", controller: 'productController'})
+                .when("/product/:state/:id?", { templateUrl: "/admin/product/index", controller: 'productController', reloadOnUrl: false})
                 .when("/section/:state/:id?", { templateUrl: "/admin/section/index", controller: 'sectionController', reloadOnUrl: false })
                 .when("/faq-group/:state/:id?", { templateUrl: "/admin/faqgroup/index", controller: 'faqGroupController', reloadOnUrl: false })
                 .when("/profile", {templateUrl: '/admin/profile/index', controller: 'profileController'})

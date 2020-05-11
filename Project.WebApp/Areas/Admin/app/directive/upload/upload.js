@@ -2,78 +2,65 @@
     angular
         .module('portal')
         .directive('portalUpload', portalUpload);
-    portalUpload.$inject = ['uploadService', 'attachmentService', '$q','$routeParams'];
-    function portalUpload(uploadService, attachmentService, $q, $routeParams) {
+    portalUpload.$inject = ['uploadService', 'attachmentService', '$q','$routeParams','loadingService'];
+    function portalUpload(uploadService, attachmentService, $q, $routeParams,loadingService) {
         var directive = {
             restrict: 'E',
             templateUrl: './Areas/Admin/app/directive/upload/upload.html',
-            link: {
-                pre: preLink
-            },
             scope: {
                 main: '=main',
                 pic: '=pic'
             }
+            ,link:link
         }
         return directive;
-        function preLink(scope, element, $event) {
-            scope.filePondConfig = {
-                allowMultiple: scope.pic.allowMultiple,
-                labelIdle: `<div>عکس خود را اینجا رها کنید یا کلیک نمایید</div>`,
-                required: true,
-                server: {
-                    process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                        const formData = new FormData();
-                        formData.append(fieldName, file, file.name);
-
-                        const request = new XMLHttpRequest();
-                        request.open('POST', `attachment/upload?type=${scope.pic.type}`);
-
-                        request.upload.onprogress = (e) => {
-                            progress(e.lengthComputable, e.loaded, e.total);
-                        };
-
-                        request.onload = function () {
-                            if (request.status >= 200 && request.status < 300) {
-                                load(request.responseText);
-                                var obj = JSON.parse(request.responseText);
-                                scope.pic.list.push(obj.Data.FileName);
-                            }
-                            else {
-                                error('خطا در آپلود فایل');
-                            }
-                        };
-                        request.send(formData);
-                        return {
-                            abort: () => {
-                                request.abort();
-                                abort();
-                            }
-                        };
-                    }
-                    , revert: (uniqueFileId, load, error) => {
-                        const request = new XMLHttpRequest();
-                        var obj = JSON.parse(uniqueFileId);
-                        var PicID = obj.Data.FileName;
-                        request.open('POST', `attachment/Remove?FileName=${PicID}&PathType=${scope.pic.type}`, true);
-                        request.onload = function () {
-                            if (request.status >= 200 && request.status < 300) {
-                                load(request.responseText);
-                            }
-                            else {
-                                error('خطا در آپلود فایل');
-                            }
-                        };
-                        request.send();
-                    }
-                }
-            }
+        function link(scope, element, $event) {
+            let file, tempFileName;
+            scope.tempListFile=[];
+            scope.selectFile = selectFile;
             scope.remove = remove;
+            scope.removeTemp = removeTemp;
+            scope.browse = browse;
+            scope.upload = upload;
             scope.confirmRemove = confirmRemove;
             scope.main.reset = reset;
+            scope.fileSelected = false;
+            scope.uploading = false;
+            scope.validTypes = [
+                "application/vnd.ms-excel",
+                "application/msexcel",
+                "application/x-msexcel",
+                "application/x-ms-excel",
+                "application/x-excel",
+                "application/x-dos_ms_excel",
+                "application/xls",
+                "application/x-xls",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/pdf",
+                "application/zip",
+                "application/x-zip-compressed",
+                "application/x-7z-compressed",
+                "application/x-rar-compressed",
+                "image/jpeg",
+                "image/x-citrix-jpeg",
+                "image/png",
+                "image/x-citrix-png",
+                "image/x-png",
+                "image/tiff",
+                "image/gif",
+                "image/bmp",
+                "image/svg+xml"
+            ];
 
+            function selectFile() {
+                file = element.find("input[type='file']").get(0).files[0];
+                //scope.fileName = file.name;
+                scope.fileSelected = true; //**state
+                scope.$apply();
+            }
             function init() {
-                element.find("#file-pond").value = "";
                 return $q.resolve().then(() => {
                     return attachmentService.list({ ParentID: $routeParams.id});
                 }).then((result) => {
@@ -105,7 +92,34 @@
                 })
             }
             function reset() {
-                element.find("#file-pond").value = "";
+                scope.tempListFile = [];
+            }
+            function removeTemp(item) {
+                loadingService.show();
+                return $q.resolve().then(() => {
+                    var index = scope.tempListFile.indexOf(item);
+                    scope.tempListFile.splice(index, 1);
+                    return attachmentService.remove({ FileName: item.FileName, PathType : '6'});
+                }).catch(() => {
+                    loadingService.hide();
+                }).finally(loadingService.hide);
+            }
+            function browse() {
+                element.find("input[type='file']").trigger("click");
+            }
+            function upload() {
+                loadingService.show();
+                return $q.resolve().then(() => {
+                    if (window.FormData !== undefined) {
+                        const formData = new FormData();
+                        formData.append(file.name, file, file.name);
+                        scope.uploading = true; // rename to state // **state
+                        return uploadService.upload({ type: '6', data: formData });
+                    }
+                }).then((result) => {
+                    scope.tempListFile.push(result);
+                })
+                    .finally(loadingService.hide);
             }
         }
     }

@@ -43,7 +43,7 @@
             {
                 name: 'product', title: 'مدیریت محصولات', icon: 'fa-angle-down', hasShow: () => { return toolsService.checkPermission('mnuproduct') }
                 , subMenus: [
-                    { route: '#/product-cartable', title: 'کارتابل اگهی ها', hasShow: () => { return toolsService.checkPermission('pgproduct-cartable') }, icon:'fa-folder-open-o' },
+                    { route: '#/product/cartable', title: 'کارتابل اگهی ها', hasShow: () => { return toolsService.checkPermission('pgproduct-cartable') }, icon:'fa-folder-open-o' },
                     { route: '#/section/cartable', title: 'تقسیمات کشوری', hasShow: () => { return true; }, icon: 'fa-diamond' },
                     { route: '#/category/cartable', title: 'دسته بندی محصولات', hasShow: () => { return toolsService.checkPermission('pgproduct-category') }, icon: 'fa-archive' },
                     { route: '#/comment/cartable', title: 'کارتابل نظرات', hasShow: () => { return toolsService.checkPermission('pgproduct-comment') }, icon: 'fa-comments-o' },

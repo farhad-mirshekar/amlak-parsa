@@ -31,5 +31,8 @@ namespace FM.Portal.Core.Model
         public DateTime RemoveDate { get; set; }
         public bool Enabled { get; set; }
         public DateTime UpdatedDate { get; set; }
+
+        //only show
+        public string SectionName { get; set; }
     }
 }

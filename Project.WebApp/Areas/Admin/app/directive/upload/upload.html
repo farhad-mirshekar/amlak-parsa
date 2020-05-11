@@ -6,10 +6,22 @@
         <div class="row">
             <div class="col-md-12" ng-if="(pic.allowMultiple === false && main.listPicUploaded.length === 0) || pic.allowMultiple">
                 <div class="upload-text">
-                    <file-pond config="filePondConfig"></file-pond>
+                    <input type="file" style="display:none" id="file" name='file' onchange="angular.element(this).scope().selectFile(event)" />
+                    <button type="button" class="btn btn-primary" ng-click="browse()"><span class="glyphicon glyphicon-folder-open"></span>انتخاب فایل</button>
+                    <button type="button" class="btn btn-success" ng-click="upload()"><span class="glyphicon glyphicon-cloud-upload"></span>بارگذاری</button>
                 </div>
             </div>
-            <div class="col-md-12" ng-if="main.listPicUploaded.length">
+            <div class="col-md-12 mt-3" ng-show="tempListFile.length > 0">
+                <h2 class="main-title">تصاویری که در حال حاضر بارگذاری کرده اید</h2>
+                <div class="ml-2 mt-2 d-sm-inline-block" ng-repeat="row in tempListFile track by $index" style="width: 10rem;">
+                    <img ng-src="../../../../../Content/TemporaryFiles/product/{{row.FileName}}" class="card-img-top" />
+                    <div class="pull-left">
+                        <i class="fa fa-close" ng-click="removeTemp(row)"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mt-3" ng-if="main.listPicUploaded.length">
+                <h2 class="main-title">تصاویری که بارگذاری کرده اید</h2>
                 <div class="ml-2 mt-2 d-sm-inline-block" ng-repeat="row in main.listPicUploaded track by $index" style="width: 10rem;">
                     <img ng-src="../../../../../Content/TemporaryFiles/{{row.Path}}/{{row.FileName}}" class="card-img-top" />
                     <div class="pull-left">
