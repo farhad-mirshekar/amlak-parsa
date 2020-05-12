@@ -650,7 +650,7 @@
         product.attachment = {};
         product.attachment.listPicUploaded = [];
 
-        product.pic = { type: '6', allowMultiple: true };
+        product.pic = { type: '6', allowMultiple: true, validTypes:'image/x-png,image/gif,image/jpeg' };
         product.pic.list = [];
 
         product.search = {};

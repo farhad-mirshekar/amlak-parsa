@@ -2,8 +2,8 @@
     angular
         .module('portal')
         .directive('portalUpload', portalUpload);
-    portalUpload.$inject = ['uploadService', 'attachmentService', '$q','$routeParams','loadingService'];
-    function portalUpload(uploadService, attachmentService, $q, $routeParams,loadingService) {
+    portalUpload.$inject = ['uploadService', 'attachmentService', '$q','$routeParams','loadingService','toaster'];
+    function portalUpload(uploadService, attachmentService, $q, $routeParams,loadingService,toaster) {
         var directive = {
             restrict: 'E',
             templateUrl: './Areas/Admin/app/directive/upload/upload.html',
@@ -26,7 +26,7 @@
             scope.main.reset = reset;
             scope.fileSelected = false;
             scope.uploading = false;
-            scope.validTypes = [
+            scope.validTypes = scope.pic.validTypes || [
                 "application/vnd.ms-excel",
                 "application/msexcel",
                 "application/x-msexcel",
@@ -53,7 +53,33 @@
                 "image/bmp",
                 "image/svg+xml"
             ];
-
+            scope.path = '';
+            switch (scope.pic.type) {
+                case '3':
+                    scope.path = 'news';
+                    break;
+                case '4':
+                    scope.path = 'article';
+                    break;
+                case '5':
+                    scope.path = 'slider';
+                    break;
+                case '6':
+                    scope.path = 'product';
+                    break;
+                case '7':
+                    scope.path = 'video';
+                    break;
+                case '8':
+                    scope.path = 'events';
+                    break;
+                case '9':
+                    scope.path = 'editor';
+                    break;
+                case '10':
+                    scope.path = 'file';
+                    break;
+            }
             function selectFile() {
                 file = element.find("input[type='file']").get(0).files[0];
                 scope.fileSelected = true; //**state
@@ -111,6 +137,8 @@
             function upload() {
                 loadingService.show();
                 return $q.resolve().then(() => {
+                    if (scope.pic.validTypes.length && scope.pic.validTypes.indexOf(file.type) === -1)
+                        return toaster.pop('error','',"قالب فایل انتخاب شده مجاز نیست");
                     if (window.FormData !== undefined) {
                         const formData = new FormData();
                         formData.append(file.name, file, file.name);
