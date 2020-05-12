@@ -650,13 +650,14 @@
         product.attachment = {};
         product.attachment.listPicUploaded = [];
 
-        product.pic = { type: '6', allowMultiple: true, validTypes:'image/x-png,image/gif,image/jpeg' };
+        product.pic = { type: '6', allowMultiple: true, validTypes:'image/jpeg' };
         product.pic.list = [];
 
         product.search = {};
         product.search.Model = {};
 
         product.main = {};
+        product.main.tabNumber = 1;
         product.main.changeState = {
             add: add,
             edit: edit,
@@ -766,6 +767,7 @@
             product.Model.Errors = [];
             product.pic.list = [];
             product.attachment.listPicUploaded = [];
+            product.main.tabNumber = 1;
         }
         function clearSearch() {
             loadingService.show();
@@ -813,9 +815,7 @@
                 } else {
                     var listError = error.split('&&');
                     product.Model.Errors = [].concat(listError);
-                    $('#content > div').animate({
-                        scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
-                    }, 'slow');
+                   
                 }
                 toaster.pop('error', '', 'خطایی اتفاق افتاده است');
             }).finally(loadingService.hide);
@@ -851,15 +851,15 @@
             }).catch((error) => {
                 loadingService.hide();
                 if (!error) {
-                    $('#content > div').animate({
+                    $('html, body').animate({
                         scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
-                    }, 'slow');
+                    }, 'slow'); 
                 } else {
                     var listError = error.split('&&');
                     product.Model.Errors = [].concat(listError);
-                    $('#content > div').animate({
+                    $('html, body').animate({
                         scrollTop: $('#ProductError').offset().top - $('#ProductError').offsetParent().offset().top
-                    }, 'slow');
+                    }, 'slow');  
                 }
                 toaster.pop('error', '', 'خطایی اتفاق افتاده است');
             }).finally(loadingService.hide);

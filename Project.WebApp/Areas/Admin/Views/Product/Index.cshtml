@@ -49,13 +49,17 @@
     <h2 class="main-title" ng-show="state === 'edit'">ویرایش آگهی</h2>
     <div class="card-body">
         <div id="ProductError" ng-show="Model.Errors.length" class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <ul ng-repeat="row in Model.Errors">
                 <li>{{row}}</li>
             </ul>
         </div>
         <div class="form-horizontal">
-            <uib-tabset class="form-tab" active="active" style="padding:10px">
-                <uib-tab heading="اطلاعات کلی آگهی">
+
+            <uib-tabset class="form-tab" style="padding:10px" type="pills" active="main.tabNumber">
+                <uib-tab index="1" ng-click="mai.tabNumber = 1" heading="اطلاعات کلی آگهی">
                     <div class="form-group">
                         <div class="col-md-10">
                             <label for="Name" class="control-label">نام آگهی</label>
@@ -161,7 +165,7 @@
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab heading="اطلاعات اصلی آگهی">
+                <uib-tab index="2" ng-click="mai.tabNumber = 2" heading="اطلاعات اصلی آگهی">
                     <div class="container mt-2 p-4" style="line-height:30px;">
                         <div class="row">
                             <div class="col-sm-6">
@@ -362,7 +366,7 @@
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab heading="بررسی تخصصی آگهی">
+                <uib-tab index="3" ng-click="mai.tabNumber = 3" heading="بررسی تخصصی آگهی">
                     <div class="form-group">
                         <div class="col-md-12">
                             <textarea froala="froalaOption" class="form-control" ng-model="Model.Description" name="Description" ng-required="false"></textarea>
@@ -370,7 +374,7 @@
 
                     </div>
                 </uib-tab>
-                <uib-tab heading="افزودن تصاویر آگهی">
+                <uib-tab index="4" ng-click="mai.tabNumber = 4" heading="افزودن تصاویر آگهی">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
