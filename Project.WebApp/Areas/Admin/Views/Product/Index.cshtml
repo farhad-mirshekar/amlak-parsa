@@ -80,74 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container mt-2 p-4" style="line-height:30px;">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="HasWater" class="control-label">ملک مورد نظر دارای <span class="text-danger">آب</span> می باشد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="HasWaterYes" ng-model="Model.HasWater" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="HasWaterNo" ng-model="Model.HasWater" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="HasGas" class="control-label">ملک مورد نظر دارای <span class="text-danger">گاز</span> می باشد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="HasGasYes" ng-model="Model.HasGas" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="HasGasNo" ng-model="Model.HasGas" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="HasElectricity" class="control-label">ملک مورد نظر دارای <span class="text-danger">برق</span> می باشد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="HasElectricityYes" ng-model="Model.HasElectricity" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="HasElectricityNo" ng-model="Model.HasElectricity" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="HasElevator" class="control-label">ملک مورد نظر دارای <span class="text-danger">آسانسور</span> می باشد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="HasElevatorYes" ng-model="Model.HasElevator" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="HasElevatorNo" ng-model="Model.HasElevator" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="HasPhone" class="control-label">ملک مورد نظر دارای <span class="text-danger">تلفن</span> می باشد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="HasPhoneYes" ng-model="Model.HasPhone" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="HasPhoneNo" ng-model="Model.HasPhone" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="Enabled" class="control-label text-danger">آگهی مورد نظر در سایت قرار گیرد؟</label>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="d-inline">
-                                    <input type="radio" id="EnabledYes" ng-model="Model.Enabled" ng-value="true"><span class="p-1">بله</span>
-                                    <input type="radio" id="EnabledNo" ng-model="Model.Enabled" ng-value="false"><span class="p-1">خیر</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">
@@ -205,8 +138,226 @@
                             <label class="control-label">اجاره</label>
                             <input type="text" ng-model="Model.Rent" class="form-control" />
                         </div>
+                        <div class="col-md-3">
+                            <label class="control-label">عمر ساختمان</label>
+                            <input type="text" ng-model="Model.YearOfConstruction" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">شماره تماس</label>
+                            <input type="text" ng-model="Model.PhoneContact" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="container mt-2 p-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="Enabled" class="control-label text-danger">آگهی مورد نظر در سایت قرار گیرد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="EnabledYes" ng-model="Model.Enabled" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="EnabledNo" ng-model="Model.Enabled" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="اطلاعات اصلی آگهی">
+                    <div class="container mt-2 p-4" style="line-height:30px;">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasWater" class="control-label">ملک مورد نظر دارای <span class="text-danger">آب</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasWaterYes" ng-model="Model.HasWater" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasWaterNo" ng-model="Model.HasWater" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasGas" class="control-label">ملک مورد نظر دارای <span class="text-danger">گاز</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasGasYes" ng-model="Model.HasGas" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasGasNo" ng-model="Model.HasGas" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasElectricity" class="control-label">ملک مورد نظر دارای <span class="text-danger">برق</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasElectricityYes" ng-model="Model.HasElectricity" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasElectricityNo" ng-model="Model.HasElectricity" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasElevator" class="control-label">ملک مورد نظر دارای <span class="text-danger">آسانسور</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasElevatorYes" ng-model="Model.HasElevator" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasElevatorNo" ng-model="Model.HasElevator" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasPhone" class="control-label">ملک مورد نظر دارای <span class="text-danger">تلفن</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasPhoneYes" ng-model="Model.HasPhone" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasPhoneNo" ng-model="Model.HasPhone" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasJacuzzi" class="control-label">ملک مورد نظر دارای <span class="text-danger">جکوزی</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasJacuzziYes" ng-model="Model.HasJacuzzi" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasJacuzziNo" ng-model="Model.HasJacuzzi" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasBalcony" class="control-label">ملک مورد نظر دارای <span class="text-danger">بالکن</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasBalconyYes" ng-model="Model.HasBalcony" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasBalconyNo" ng-model="Model.HasBalcony" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasConferenceHall" class="control-label">ملک مورد نظر دارای <span class="text-danger">سالن کنفرانس</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasConferenceHallYes" ng-model="Model.HasConferenceHall" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasConferenceHallNo" ng-model="Model.HasConferenceHall" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasGuard" class="control-label">ملک مورد نظر دارای <span class="text-danger">نگهبان</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasGuardYes" ng-model="Model.HasGuard" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasGuardNo" ng-model="Model.HasGuard" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasLobby" class="control-label">ملک مورد نظر دارای <span class="text-danger">لابی</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasLobbyYes" ng-model="Model.HasLobby" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasLobbyNo" ng-model="Model.HasLobby" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasParking" class="control-label">ملک مورد نظر دارای <span class="text-danger">پارکینگ</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasParkingYes" ng-model="Model.HasParking" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasParkingNo" ng-model="Model.HasParking" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasSauna" class="control-label">ملک مورد نظر دارای <span class="text-danger">سونا</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasSaunaYes" ng-model="Model.HasSauna" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasSaunaNo" ng-model="Model.HasSauna" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasAirConditioning" class="control-label">ملک مورد نظر دارای <span class="text-danger">تهویه مطبوع</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasAirConditioningYes" ng-model="Model.HasAirConditioning" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasAirConditioningNo" ng-model="Model.HasAirConditioning" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasSportsHall" class="control-label">ملک مورد نظر دارای <span class="text-danger">سالن ورزش</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasSportsHallYes" ng-model="Model.HasSportsHall" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasSportsHallNo" ng-model="Model.HasSportsHall" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasRemoteDoor" class="control-label">ملک مورد نظر دارای <span class="text-danger">درب ریموت</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasRemoteDoorYes" ng-model="Model.HasRemoteDoor" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasRemoteDoorNo" ng-model="Model.HasRemoteDoor" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasSwimmingPool" class="control-label">ملک مورد نظر دارای <span class="text-danger">استخر</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasSwimmingPoolYes" ng-model="Model.HasSwimmingPool" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasSwimmingPoolNo" ng-model="Model.HasSwimmingPool" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="HasCentralAntenna" class="control-label">ملک مورد نظر دارای <span class="text-danger">آنتن مرکزی</span> می باشد؟</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="d-inline">
+                                    <input type="radio" id="HasCentralAntennaYes" ng-model="Model.HasCentralAntenna" ng-value="true"><span class="p-1">بله</span>
+                                    <input type="radio" id="HasCentralAntennaNo" ng-model="Model.HasCentralAntenna" ng-value="false"><span class="p-1">خیر</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-3" ng-show="Model.HasPhone">
                             <label class="control-label">تعداد خط تلفن</label>
+                            <input type="text" ng-model="Model.CountPhone" class="form-control" />
+                        </div>
+                        <div class="col-md-3" ng-show="Model.HasParking">
+                            <label class="control-label">تعداد پارکینگ</label>
                             <input type="text" ng-model="Model.CountPhone" class="form-control" />
                         </div>
                     </div>

@@ -49,3 +49,45 @@ CREATE TABLE [app].[Section](
 ) ON [PRIMARY]
 
 GO
+
+ALTER TABLE app.Product
+ADD HasJacuzzi BIT NULL
+
+ALTER TABLE app.Product
+ADD HasBalcony BIT NULL
+
+ALTER TABLE app.Product
+ADD HasConferenceHall BIT NULL
+
+ALTER TABLE app.Product
+ADD HasGuard BIT NULL
+
+ALTER TABLE app.Product
+ADD HasLobby BIT NULL
+
+ALTER TABLE app.Product
+ADD HasParking BIT NULL
+
+ALTER TABLE app.Product
+ADD CountParking int NULL
+
+ALTER TABLE app.Product
+ADD HasSauna BIT NULL
+
+ALTER TABLE app.Product
+ADD HasAirConditioning BIT NULL
+
+ALTER TABLE app.Product
+ADD HasSportsHall BIT NULL
+
+ALTER TABLE app.Product
+ADD HasRemoteDoor BIT NULL
+
+ALTER TABLE app.Product
+ADD HasSwimmingPool BIT NULL
+
+ALTER TABLE app.Product
+ADD HasCentralAntenna BIT NULL
+
+ALTER TABLE app.Product
+ADD YearOfConstruction Nvarchar(1000)

@@ -3,7 +3,7 @@ using System;
 
 namespace FM.Portal.Core.Model
 {
-   public class Product:Entity
+    public class Product : Entity
     {
         public SellingProductType SellingProductType { get; set; }
         public ProductType ProductType { get; set; }
@@ -31,7 +31,34 @@ namespace FM.Portal.Core.Model
         public DateTime RemoveDate { get; set; }
         public bool Enabled { get; set; }
         public DateTime UpdatedDate { get; set; }
-
+        //جکوزی
+        public bool? HasJacuzzi { get; set; }
+        //بالکن
+        public bool? HasBalcony { get; set; }
+        //سالن کنفرانس
+        public bool? HasConferenceHall { get; set; }
+        //نگهبان
+        public bool? HasGuard { get; set; }
+        //لابی
+        public bool? HasLobby { get; set; }
+        //پارکینگ
+        public bool? HasParking { get; set; }
+        //تعداد پارکینگ
+        public int? CountParking { get; set; }
+        //سونا
+        public bool? HasSauna { get; set; }
+        //تهویه مطبوغ
+        public bool? HasAirConditioning { get; set; }
+        //سالن ورزش
+        public bool? HasSportsHall { get; set; }
+        //درب ریموت
+        public bool? HasRemoteDoor { get; set; }
+        //استخر
+        public bool? HasSwimmingPool { get; set; }
+        //آنتن مرکزی
+        public bool? HasCentralAntenna { get; set; }
+        //سال ساخت
+        public string YearOfConstruction { get; set; }
         //only show
         public string SectionName { get; set; }
     }

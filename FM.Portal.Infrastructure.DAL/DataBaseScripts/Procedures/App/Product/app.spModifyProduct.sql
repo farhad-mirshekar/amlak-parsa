@@ -27,7 +27,22 @@ CREATE PROCEDURE app.spModifyProduct
 @SectionID uniqueidentifier ,
 @Title nvarchar(100),
 @UserID uniqueidentifier,
-@Enabled BIT
+@Enabled BIT,
+
+@HasJacuzzi bit,
+@HasBalcony bit,
+@HasConferenceHall bit,
+@HasGuard bit,
+@HasLobby bit,
+@HasParking bit,
+@CountParking int,
+@HasSauna bit,
+@HasAirConditioning bit,
+@HasSportsHall bit,
+@HasRemoteDoor bit,
+@HasSwimmingPool bit,
+@HasCentralAntenna bit,
+@YearOfConstruction bit
 
 --WITH ENCRYPTION
 AS
@@ -37,35 +52,49 @@ BEGIN
 			DECLARE @TrackingCode NVARCHAR(20)
 			SET @TrackingCode = (select STR(FLOOR(RAND(CHECKSUM(NEWID()))*(9999999999-1000000000+1)+1000000000)))
 
-			INSERT INTO [app].[Product] (ID , CountPhone , CountRoom , [Description] , DocumentType , FloorCoveringType , HasElectricity , HasElevator , HasGas , HasPhone , HasWater , Meter , OrginalPrice , PhoneContact , PrePayment , Rent , SectionID , SellingProductType , Title , TrackingCode,UserID,[Enabled],ProductType , CreationDate , UpdatedDate)
-			VALUES(@ID , @CountPhone , @CountRoom , @Description , @DocumentType , @FloorCoveringType , @HasElectricity , @HasElevator , @HasGas , @HasPhone , @HasWater , @Meter , @OrginalPrice , @PhoneContact , @PrePayment , @Rent , @SectionID , @SellingProductType , @Title , @TrackingCode,@UserID,@Enabled,@ProductType,GETDATE() , GETDATE())
+			INSERT INTO [app].[Product] (ID , CountPhone , CountRoom , [Description] , DocumentType , FloorCoveringType , HasElectricity , HasElevator , HasGas , HasPhone , HasWater , Meter , OrginalPrice , PhoneContact , PrePayment , Rent , SectionID , SellingProductType , Title , TrackingCode,UserID,[Enabled],ProductType , CreationDate , UpdatedDate,HasAirConditioning , HasBalcony , HasCentralAntenna , HasConferenceHall , HasGuard , HasJacuzzi , HasLobby , HasParking , HasRemoteDoor , HasSauna , HasSportsHall , HasSwimmingPool , CountParking , YearOfConstruction)
+			VALUES(@ID , @CountPhone , @CountRoom , @Description , @DocumentType , @FloorCoveringType , @HasElectricity , @HasElevator , @HasGas , @HasPhone , @HasWater , @Meter , @OrginalPrice , @PhoneContact , @PrePayment , @Rent , @SectionID , @SellingProductType , @Title , @TrackingCode,@UserID,@Enabled,@ProductType,GETDATE() , GETDATE() , @HasAirConditioning , @HasBalcony , @HasCentralAntenna , @HasConferenceHall , @HasGuard , @HasJacuzzi , @HasLobby , @HasParking , @HasRemoteDoor , @HasSauna , @HasSportsHall , @HasSwimmingPool , @CountParking , @YearOfConstruction)
 		END
 	ELSE -- update
 		BEGIN
 			UPDATE [app].[Product]
 			SET
-				 CountPhone = @CountPhone
-				, CountRoom = @CountRoom
-				, [Description] = @Description
-				,FloorCoveringType = @FloorCoveringType
-				,HasElectricity = @HasElectricity
-				,HasElevator = @HasElevator
-				,HasGas = @HasGas
-				,HasPhone = @HasPhone
-				,HasWater = @HasWater
-				,Meter = @Meter
-				,OrginalPrice = @OrginalPrice
-				,PhoneContact = @PhoneContact
-				,PrePayment = @PrePayment
-				,Rent = @Rent
-				,SectionID = @SectionID
-				,Title = @Title
-				,DocumentType = @DocumentType
-				,SellingProductType = @SellingProductType
-				,UserID = @UserID
-				,[Enabled] = @Enabled
-				,ProductType = @ProductType
-				,UpdatedDate = GETDATE()
+				CountPhone = @CountPhone,
+				CountRoom = @CountRoom,
+				[Description] = @Description,
+				FloorCoveringType = @FloorCoveringType,
+				HasElectricity = @HasElectricity,
+				HasElevator = @HasElevator,
+				HasGas = @HasGas,
+				HasPhone = @HasPhone,
+				HasWater = @HasWater,
+				Meter = @Meter,
+				OrginalPrice = @OrginalPrice,
+				PhoneContact = @PhoneContact,
+				PrePayment = @PrePayment,
+				Rent = @Rent,
+				SectionID = @SectionID,
+				Title = @Title,
+				DocumentType = @DocumentType,
+				SellingProductType = @SellingProductType,
+				UserID = @UserID,
+				[Enabled] = @Enabled,
+				ProductType = @ProductType,
+				UpdatedDate = GETDATE(),
+				HasAirConditioning = @HasAirConditioning , 
+				HasBalcony = @HasBalcony, 
+				HasCentralAntenna = @HasCentralAntenna , 
+				HasConferenceHall = @HasConferenceHall , 
+				HasGuard =@HasGuard, 
+				HasJacuzzi =@HasJacuzzi, 
+				HasLobby =@HasLobby, 
+				HasParking =@HasParking, 
+				HasRemoteDoor =@HasRemoteDoor, 
+				HasSauna =@HasSauna, 
+				HasSportsHall =@HasSportsHall, 
+				HasSwimmingPool =@HasSwimmingPool, 
+				CountParking =@CountParking, 
+				YearOfConstruction = @YearOfConstruction
 			WHERE
 				[ID] = @ID
 		END

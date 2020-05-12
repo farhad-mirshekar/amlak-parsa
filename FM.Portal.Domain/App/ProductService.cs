@@ -98,6 +98,11 @@ namespace FM.Portal.Domain
 
             if (model.SectionID == null || model.SectionID == Guid.Empty)
                 Errors.Add("شهرستان را مشخص نمایید");
+            if(model.HasParking.HasValue && model.HasParking.Value)
+            {
+                if(model.CountParking.HasValue && model.CountParking.Value == 0)
+                    Errors.Add("تعداد پارکینگ را مشخص نمایید");
+            }
 
             if (Errors.Any())
                 return Result.Failure(message: string.Join("&&", Errors));

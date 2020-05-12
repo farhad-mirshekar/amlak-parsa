@@ -61,6 +61,20 @@ namespace FM.Portal.Infrastructure.DAL
                             obj.UpdatedDate = SQLHelper.CheckDateTimeNull(dr["UpdatedDate"]);
                             obj.SectionName = SQLHelper.CheckStringNull(dr["SectionName"]);
                             obj.ProductType = (ProductType)SQLHelper.CheckByteNull(dr["ProductType"]);
+                            obj.HasAirConditioning = SQLHelper.CheckBoolNull(dr["HasAirConditioning"]);
+                            obj.HasBalcony = SQLHelper.CheckBoolNull(dr["HasBalcony"]);
+                            obj.HasCentralAntenna = SQLHelper.CheckBoolNull(dr["HasCentralAntenna"]);
+                            obj.HasConferenceHall = SQLHelper.CheckBoolNull(dr["HasConferenceHall"]);
+                            obj.HasGuard = SQLHelper.CheckBoolNull(dr["HasGuard"]);
+                            obj.HasJacuzzi = SQLHelper.CheckBoolNull(dr["HasJacuzzi"]);
+                            obj.HasLobby = SQLHelper.CheckBoolNull(dr["HasLobby"]);
+                            obj.HasParking = SQLHelper.CheckBoolNull(dr["HasParking"]);
+                            obj.HasRemoteDoor = SQLHelper.CheckBoolNull(dr["HasRemoteDoor"]);
+                            obj.HasSauna = SQLHelper.CheckBoolNull(dr["HasSauna"]);
+                            obj.HasSportsHall = SQLHelper.CheckBoolNull(dr["HasSportsHall"]);
+                            obj.HasSwimmingPool = SQLHelper.CheckBoolNull(dr["HasSwimmingPool"]);
+                            obj.CountParking = SQLHelper.CheckIntNull(dr["CountParking"]);
+                            obj.YearOfConstruction = SQLHelper.CheckStringNull(dr["YearOfConstruction"]);
 
                         }
                     }
@@ -139,7 +153,7 @@ namespace FM.Portal.Infrastructure.DAL
             {
                 using (SqlConnection con = new SqlConnection(SQLHelper.GetConnectionString()))
                 {
-                    SqlParameter[] param = new SqlParameter[23];
+                    SqlParameter[] param = new SqlParameter[37];
                     param[0] = new SqlParameter("@ID", model.ID);
 
                     param[1] = new SqlParameter("@CountPhone", model.CountPhone);
@@ -164,6 +178,20 @@ namespace FM.Portal.Infrastructure.DAL
                     param[20] = new SqlParameter("@UserID",_requestInfo.UserId);
                     param[21] = new SqlParameter("@ProductType", (byte)model.ProductType);
                     param[22] = new SqlParameter("@Enabled", model.Enabled);
+                    param[23] = new SqlParameter("@HasAirConditioning", model.HasAirConditioning);
+                    param[24] = new SqlParameter("@HasBalcony", model.HasBalcony);
+                    param[25] = new SqlParameter("@HasCentralAntenna", model.HasCentralAntenna);
+                    param[26] = new SqlParameter("@HasConferenceHall", model.HasConferenceHall);
+                    param[27] = new SqlParameter("@HasGuard", model.HasGuard);
+                    param[28] = new SqlParameter("@HasJacuzzi", model.HasJacuzzi);
+                    param[29] = new SqlParameter("@HasLobby", model.HasLobby);
+                    param[30] = new SqlParameter("@HasParking", model.HasParking);
+                    param[31] = new SqlParameter("@HasRemoteDoor", model.HasRemoteDoor);
+                    param[32] = new SqlParameter("@HasSauna", model.HasSauna);
+                    param[33] = new SqlParameter("@HasSportsHall", model.HasSportsHall);
+                    param[34] = new SqlParameter("@HasSwimmingPool", model.HasSwimmingPool);
+                    param[35] = new SqlParameter("@CountParking", model.CountParking);
+                    param[36] = new SqlParameter("@YearOfConstruction", model.YearOfConstruction);
 
                     int result = SQLHelper.ExecuteNonQuery(con, System.Data.CommandType.StoredProcedure, "app.spModifyProduct", param);
                     if (result > 0)
