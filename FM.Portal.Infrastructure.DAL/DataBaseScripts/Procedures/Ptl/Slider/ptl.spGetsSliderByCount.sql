@@ -20,7 +20,7 @@ BEGIN
 		pbl.Attachment attachment ON slider.ID = attachment.ParentID
 	WHERE 
 		slider.Deleted = 0 AND
-		slider.[Enabled] = 1
+		slider.[Enabled] = 2
 	)
 
 	SELECT * 

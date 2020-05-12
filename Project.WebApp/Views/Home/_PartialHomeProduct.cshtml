@@ -9,11 +9,21 @@
                 <div class="row">
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-6 col-sm-6 d-flex align-items-stretch">
                             <div class="card">
-                                <img src="~/Content/TemporaryFiles/@Enum.GetName(typeof(PathType), item.PathType)/@item.FileName" alt="@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)" class="card-img-top img-rounded" />
+                                <figure>
+                                    <img src="~/Content/TemporaryFiles/@Enum.GetName(typeof(PathType), item.PathType)/@item.FileName" alt="@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)" class="card-img-top img-rounded" />
+                                </figure>
                                 <div class="card-body">
                                     <h5 class="card-title">@(item.Title.Length > 20 ? item.Title.Substring(0, 19) + " ...." : item.Title)</h5>
+                                    <div class="">
+                                        <i class="fa fa-map-marker"></i>
+                                        <label class="control-label">@item.ProvinceType.ToString().Replace('_', ' ')</label> -  <label class="control-label">@item.SectionName</label>
+                                    </div>
+                                    <div class="">
+                                        <i class="fa fa-sellsy"></i>
+                                        <label class="control-label">@item.SellingProductType.ToString().Replace('_',' ')</label>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="btn-group-justified" style="float:left">

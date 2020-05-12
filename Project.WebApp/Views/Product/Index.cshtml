@@ -24,15 +24,18 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         @Html.Partial("~/Views/product/_PartialCarousel.cshtml", pic)
                     </div>
-                    <div class="col-md-12 mt-2">
+                    <div class="col-lg-6 col-md-12">
                         @Html.Partial("_PartialFeatures", Model)
                     </div>
                 </div>
-                <div class="row">
-                    @Html.Partial("_PartialMain", Model)
+                <div class="row mt-3">
+                    <div class="col-lg-12">
+                        @Html.Partial("_PartialMain", Model)
+                    </div>
+
                 </div>
             </div>
         </div>
