@@ -54,7 +54,9 @@
                                     <span class="block">قیمت فروش</span>
                                 </div>
                                 <div class="c-params__list-value">
-                                    <span class="block">@String.Format("{0:C0}", Model.OrginalPrice).Replace("$", "") تومان</span>
+                                    <span class="block">
+                                        @(Model.OrginalPrice != "قیمت توافقی" ? String.Format("{0:C0} تومان", FM.Portal.Core.Common.SQLHelper.CheckDecimalNull(Model.OrginalPrice)).Replace("$", "") : Model.OrginalPrice)
+                                    </span>
                                 </div>
                             </li>
                         }
@@ -65,17 +67,22 @@
                                     <span class="block">قیمت رهن</span>
                                 </div>
                                 <div class="c-params__list-value">
-                                    <span class="block">@String.Format("{0:C0}", Model.PrePayment).Replace("$", "") تومان</span>
+                                    <span class="block">
+                                        @(Model.PrePayment != "قیمت توافقی" ? String.Format("{0:C0} تومان", FM.Portal.Core.Common.SQLHelper.CheckDecimalNull(Model.PrePayment)).Replace("$", "") : Model.PrePayment)
+                                    </span>
                                 </div>
                             </li>
-                            if (Model.Rent.HasValue && Model.Rent.Value > 0)
+                            if (Model.Rent != null && Model.Rent != "0")
                             {
                                 <li>
                                     <div class="c-params__list-key">
                                         <span class="block">قیمت اجاره</span>
                                     </div>
                                     <div class="c-params__list-value">
-                                        <span class="block">@String.Format("{0:C0}", Model.Rent).Replace("$", "") تومان</span>
+                                        <span class="block">
+                                            @(Model.Rent != "قیمت توافقی" ? String.Format("{0:C0} تومان", FM.Portal.Core.Common.SQLHelper.CheckDecimalNull(Model.Rent)).Replace("$", "") : Model.Rent)
+                                        </span>
+
                                     </div>
                                 </li>
                             }
@@ -87,17 +94,22 @@
                                     <span class="block">قیمت اجاره</span>
                                 </div>
                                 <div class="c-params__list-value">
-                                    <span class="block">@String.Format("{0:C0}", Model.Rent).Replace("$", "") تومان</span>
+                                    <span class="block">
+                                        @(Model.Rent != "قیمت توافقی" ? String.Format("{0:C0} تومان", FM.Portal.Core.Common.SQLHelper.CheckDecimalNull(Model.Rent)).Replace("$", "") : Model.Rent)
+                                    </span>
                                 </div>
                             </li>
-                            if (Model.PrePayment.HasValue && Model.PrePayment.Value > 0)
+                            if (Model.PrePayment != null && Model.PrePayment != "0")
                             {
                                 <li>
                                     <div class="c-params__list-key">
                                         <span class="block">قیمت رهن</span>
                                     </div>
                                     <div class="c-params__list-value">
-                                        <span class="block">@String.Format("{0:C0}", Model.PrePayment).Replace("$", "") تومان</span>
+                                        <span class="block">
+                                            @(Model.PrePayment != "قیمت توافقی" ? String.Format("{0:C0} تومان", FM.Portal.Core.Common.SQLHelper.CheckDecimalNull(Model.PrePayment)).Replace("$", "") : Model.PrePayment)
+                                        </span>
+
                                     </div>
                                 </li>
                             }
@@ -138,11 +150,11 @@
                     </ul>
                 </div>
                 <div id="descriptionProduct" class="tab-pane fade show active">
-                        <div id="fullDesc" class="mt-3">
-                            @Html.Raw(Model.Description)
-                        </div>
-
+                    <div id="fullDesc" class="mt-3">
+                        @Html.Raw(Model.Description)
                     </div>
+
+                </div>
                 @*<div id="commentProduct" class="tab-pane fade">
                         <div class="col-md-12 mt-3">
                             @Html.Action("Index", "Comment", new { DocumentID = Model.ID, State = "Product" })

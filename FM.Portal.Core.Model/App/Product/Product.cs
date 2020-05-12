@@ -9,10 +9,10 @@ namespace FM.Portal.Core.Model
         public ProductType ProductType { get; set; }
         public Guid? SectionID { get; set; }
         public int? Meter { get; set; }
-        public decimal? OrginalPrice { get; set; }
+        public string OrginalPrice { get; set; }
         public DocumentForProductType DocumentType { get; set; }
-        public decimal? PrePayment { get; set; }
-        public decimal? Rent { get; set; }
+        public string PrePayment { get; set; }
+        public string Rent { get; set; }
         public bool? HasWater { get; set; }
         public bool? HasElectricity { get; set; }
         public bool? HasGas { get; set; }

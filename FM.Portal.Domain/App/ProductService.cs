@@ -65,7 +65,7 @@ namespace FM.Portal.Domain
             {
                 model.Rent = null;
                 model.PrePayment = null;
-                if(model.OrginalPrice == 0)
+                if(model.OrginalPrice == "0")
                     Errors.Add("قیمت را مشخص نمایید");
             }
             if (model.SellingProductType == SellingProductType.رهن || model.SellingProductType == SellingProductType.اجاره)
@@ -73,12 +73,12 @@ namespace FM.Portal.Domain
                 model.OrginalPrice = null;
                 if(model.SellingProductType == SellingProductType.رهن)
                 {
-                    if (model.PrePayment == 0)
+                    if (model.PrePayment == "0")
                         Errors.Add("قیمت رهن را مشخص نمایید");
                 }
                 if (model.SellingProductType == SellingProductType.اجاره)
                 {
-                    if (model.Rent == 0)
+                    if (model.Rent == "0")
                         Errors.Add("قیمت اجاره را مشخص نمایید");
                 }
             }

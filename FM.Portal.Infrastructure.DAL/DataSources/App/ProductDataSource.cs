@@ -46,11 +46,11 @@ namespace FM.Portal.Infrastructure.DAL
                             obj.HasPhone = SQLHelper.CheckBoolNull(dr["HasPhone"]);
                             obj.HasWater = SQLHelper.CheckBoolNull(dr["HasWater"]);
                             obj.Meter = SQLHelper.CheckIntNull(dr["Meter"]);
-                            obj.OrginalPrice = SQLHelper.CheckDecimalNull(dr["OrginalPrice"]);
+                            obj.OrginalPrice = SQLHelper.CheckStringNull(dr["OrginalPrice"]);
                             obj.PhoneContact = SQLHelper.CheckStringNull(dr["PhoneContact"]);
-                            obj.PrePayment = SQLHelper.CheckDecimalNull(dr["PrePayment"]);
+                            obj.PrePayment = SQLHelper.CheckStringNull(dr["PrePayment"]);
                             obj.SellingProductType = (SellingProductType)SQLHelper.CheckByteNull(dr["SellingProductType"]);
-                            obj.Rent = SQLHelper.CheckDecimalNull(dr["Rent"]);
+                            obj.Rent = SQLHelper.CheckStringNull(dr["Rent"]);
                             obj.SectionID = SQLHelper.CheckGuidNull(dr["SectionID"]);
                             obj.Title = SQLHelper.CheckStringNull(dr["Title"]);
                             obj.DocumentType = (DocumentForProductType)SQLHelper.CheckByteNull(dr["DocumentType"]);
@@ -84,7 +84,7 @@ namespace FM.Portal.Infrastructure.DAL
                 param[1] = new SqlParameter("@Meter", SqlDbType.Int);
                 param[1].Value = (object)listVM.Meter ?? DBNull.Value;
 
-                param[2] = new SqlParameter("@OrginalPrice", SqlDbType.Money);
+                param[2] = new SqlParameter("@OrginalPrice", SqlDbType.NVarChar);
                 param[2].Value = (object)listVM.OrginalPrice ?? DBNull.Value;
 
                 param[3] = new SqlParameter("@DocumentType", SqlDbType.TinyInt);

@@ -4,7 +4,7 @@
     {
         public string TrackingCode { get; set; }
         public int? Meter { get; set; }
-        public decimal? OrginalPrice { get; set; }
+        public string OrginalPrice { get; set; }
         public DocumentForProductType DocumentType { get; set; }
         public FloorCoveringType FloorCoveringType { get; set; }
         public ProductType ProductType { get; set; }
