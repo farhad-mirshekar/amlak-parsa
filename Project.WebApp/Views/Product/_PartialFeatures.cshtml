@@ -1,0 +1,97 @@
+﻿@model FM.Portal.Core.Model.Product
+@{
+    bool Negativefeatures = true;
+    bool Positivefeatures = true;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <section class="card">
+                <div class="card-header">
+                    <h5>
+                        <i class="fa fa-check text-success"></i>
+                        ویژگی های مثبت
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @if (Model.HasWater.HasValue && Model.HasWater.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>آب</li>
+                        }
+                        @if (Model.HasGas.HasValue && Model.HasGas.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>گاز</li>
+                        }
+                        @if (Model.HasElectricity.HasValue && Model.HasElectricity.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>برق</li>
+                        }
+                        @if (Model.HasElevator.HasValue && Model.HasElevator.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>آسانسور</li>
+                        }
+                        @if (Model.HasPhone.HasValue && Model.HasPhone.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>تلفن</li>
+                        }
+                        @if (Positivefeatures)
+                        {
+                            <li class="list-group-item">ندارد</li>
+                        }
+                    </ul>
+
+                </div>
+            </section>
+        </div>
+        <div class="col-md-6">
+            <section class="card">
+                <div class="card-header">
+                    <h5>
+                        <i class="fa fa-times text-danger"></i>
+                        ویژگی های منفی
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @if (!Model.HasWater.HasValue || !Model.HasWater.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>آب</li>
+                        }
+                        @if (!Model.HasGas.HasValue || !Model.HasGas.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>گاز</li>
+                        }
+                        @if (!Model.HasElectricity.HasValue || !Model.HasElectricity.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>برق</li>
+                        }
+                        @if (!Model.HasElevator.HasValue || !Model.HasElevator.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>آسانسور</li>
+                        }
+                        @if (!Model.HasPhone.HasValue || !Model.HasPhone.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>تلفن</li>
+                        }
+                        @if (Negativefeatures)
+                        {
+                            <li class="list-group-item">ندارد</li>
+                        }
+                    </ul>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

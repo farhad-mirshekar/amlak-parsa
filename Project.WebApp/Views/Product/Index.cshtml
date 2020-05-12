@@ -1,46 +1,34 @@
 ﻿@model FM.Portal.Core.Model.Product
 @{
-    ViewBag.Title = Model.Name;
-    List<FM.Portal.Core.Model.Attachment> pic = ViewBag.pic;
+    ViewBag.Title = Model.Title;
+    var pic = (List<FM.Portal.Core.Model.Attachment>)ViewBag.pic;
 }
 @section Head{
-    <meta itemprop="name" name="twitter:title" property="dc.title" content="@Model.Name">
-    <meta name="description" property="dc.description" content="@Model.MetaDescription">
-    <meta property="og:type" content="product">
-    <meta property="product:modified_time" content="@Model.UpdatedDate">
-    <meta name="keywords" property="product:tag" content="@Model.MetaKeywords">
-    <meta property="nastooh:publishDate" content="@Model.CreationDate.ToString("yyyy-MM-dd")">
-    <meta property="og:title" itemprop="headline" content="@Model.MetaTitle">
+    <meta itemprop="name" name="twitter:title" property="dc.title" content="@Model.Title">
+    @*<meta name="description" property="dc.description" content="@Model.MetaDescription">
+        <meta property="og:type" content="product">
+        <meta property="product:modified_time" content="@Model.UpdatedDate">
+        <meta name="keywords" property="product:tag" content="@Model.MetaKeywords">
+        <meta property="nastooh:publishDate" content="@Model.CreationDate.ToString("yyyy-MM-dd")">
+        <meta property="og:title" itemprop="headline" content="@Model.MetaTitle">*@
 }
 @section bodySection{
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="@Url.RouteUrl("Home")">خانه</a></li>
-            <li class="breadcrumb-item"><a href="#">محصولات</a></li>
-            <li class="breadcrumb-item active">@Model.Name</li>
+            <li class="breadcrumb-item"><a href="#">آگهی</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
         </ol>
     </nav>
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         @Html.Partial("~/Views/product/_PartialCarousel.cshtml", pic)
                     </div>
-                    <div class="col-md-6 col-sm-7 col-xs-12">
-                        <section>
-                            <h5>@Model.Name</h5>
-                            <div id="product-description">
-                                @Html.Raw(Model.ShortDescription)
-                            </div>
-                        </section>
-                    </div>
-                    <div class="col-md-3 col-sm-5 col-xs-12" id="price">
-                        @using (Html.BeginRouteForm("Product", FormMethod.Post, new { id = "product-details-form" }))
-                        {
-                            @Html.Partial("~/Views/product/_PartialPrice.cshtml", Model)
-                        }
-
+                    <div class="col-md-12 mt-2">
+                        @Html.Partial("_PartialFeatures", Model)
                     </div>
                 </div>
                 <div class="row">

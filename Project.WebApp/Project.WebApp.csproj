@@ -296,6 +296,7 @@
     <Compile Include="Controllers\FaqGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1731,7 +1732,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\_PartialCarousel.cshtml" />
     <Content Include="Views\Product\_PartialMain.cshtml" />
-    <Content Include="Views\Product\_PartialPrice.cshtml" />
+    <Content Include="Views\Product\_PartialFeatures.cshtml" />
     <Content Include="Views\Shared\_PartialCarousel.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
     <Content Include="Views\Shared\_PartialSideArticle.cshtml" />

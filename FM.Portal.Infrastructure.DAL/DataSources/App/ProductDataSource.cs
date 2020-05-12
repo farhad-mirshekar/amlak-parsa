@@ -17,13 +17,16 @@ namespace FM.Portal.Infrastructure.DAL
             _requestInfo = requestInfo;
         }
 
-        public Result<Product> Get(Guid ID)
+        public Result<Product> Get(Guid? ID , string TrackingCode)
         {
             try
             {
                 var obj = new Product();
-                SqlParameter[] param = new SqlParameter[1];
-                param[0] = new SqlParameter("@ID", ID);
+                SqlParameter[] param = new SqlParameter[2];
+                param[0] = new SqlParameter("@ID", SqlDbType.UniqueIdentifier);
+                param[0].Value = (object)ID ?? DBNull.Value;
+
+                param[1] = new SqlParameter("@TrackingCode", TrackingCode);
 
                 using (SqlConnection con = new SqlConnection(SQLHelper.GetConnectionString()))
                 {
@@ -164,7 +167,7 @@ namespace FM.Portal.Infrastructure.DAL
 
                     int result = SQLHelper.ExecuteNonQuery(con, System.Data.CommandType.StoredProcedure, "app.spModifyProduct", param);
                     if (result > 0)
-                        return Get(model.ID);
+                        return Get(model.ID,null);
                     return Result<Product>.Failure();
                 }
             }

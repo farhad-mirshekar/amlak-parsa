@@ -5,7 +5,8 @@ IF EXISTS(SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spGetP
 GO
 
 CREATE PROCEDURE app.spGetProduct
-@ID UNIQUEIDENTIFIER
+@ID UNIQUEIDENTIFIER,
+@TrackingCode NVARCHAR(20)
 --WITH ENCRYPTION
 AS
 BEGIN
@@ -19,5 +20,6 @@ BEGIN
 	INNER JOIN 
 		[app].Section section ON product.SectionID = section.ID
 	WHERE 
-		product.ID = @ID
+		(@ID IS NULL OR product.ID = @ID)
+	AND (@TrackingCode IS NULL OR product.TrackingCode = @TrackingCode)
 END

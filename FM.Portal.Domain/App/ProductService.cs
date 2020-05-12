@@ -35,7 +35,10 @@ namespace FM.Portal.Domain
         }
 
         public Result<Product> Get(Guid ID)
-        => _dataSource.Get(ID);
+        => _dataSource.Get(ID,null);
+
+        public Result<Product> Get(string TrackingCode)
+        => _dataSource.Get(null, TrackingCode);
 
         public Result<List<Product>> List(ProductListVM listVM)
         {
@@ -58,6 +61,43 @@ namespace FM.Portal.Domain
             List<string> Errors = new List<string>();
             if (model.Title == null || model.Title == "" || model.Title == string.Empty)
                 Errors.Add("عنوان آگهی را وارد نمایید");
+            if(model.SellingProductType == SellingProductType.فروش)
+            {
+                model.Rent = null;
+                model.PrePayment = null;
+                if(model.OrginalPrice == 0)
+                    Errors.Add("قیمت را مشخص نمایید");
+            }
+            if (model.SellingProductType == SellingProductType.رهن || model.SellingProductType == SellingProductType.اجاره)
+            {
+                model.OrginalPrice = null;
+                if(model.SellingProductType == SellingProductType.رهن)
+                {
+                    if (model.PrePayment == 0)
+                        Errors.Add("قیمت رهن را مشخص نمایید");
+                }
+                if (model.SellingProductType == SellingProductType.اجاره)
+                {
+                    if (model.Rent == 0)
+                        Errors.Add("قیمت اجاره را مشخص نمایید");
+                }
+            }
+            if(model.HasPhone.HasValue && model.HasPhone.Value)
+            {
+                if(model.CountPhone.HasValue && model.CountPhone.Value == 0)
+                    Errors.Add("تعداد خطوط تلفن را مشخص نمایید");
+            }
+            if(model.FloorCoveringType == FloorCoveringType.نامشخص)
+                Errors.Add("نوع کف را مشخص نمایید");
+
+            if (model.ProductType == ProductType.نامشخص)
+                Errors.Add("نوع ملک را مشخص نمایید");
+
+            if (model.ProvinceType == ProvinceType.نامشخص)
+                Errors.Add("استان را مشخص نمایید");
+
+            if (model.SectionID == null || model.SectionID == Guid.Empty)
+                Errors.Add("شهرستان را مشخص نمایید");
 
             if (Errors.Any())
                 return Result.Failure(message: string.Join("&&", Errors));

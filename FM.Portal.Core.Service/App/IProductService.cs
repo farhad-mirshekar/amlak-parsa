@@ -10,6 +10,7 @@ namespace FM.Portal.Core.Service
         Result<Product> Add(Product model);
         Result<Product> Edit(Product model);
         Result<Product> Get(Guid ID);
+        Result<Product> Get(string TrackingCode);
         Result<List<Product>> List(ProductListVM listVM);
         Result<List<ShowProductOnHomePageListVM>> ListForWeb(ProductListVM listVM,int Count);
     }
