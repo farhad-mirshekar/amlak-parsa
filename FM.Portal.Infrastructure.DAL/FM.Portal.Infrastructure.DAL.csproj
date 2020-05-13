@@ -116,6 +116,8 @@
     <Content Include="DataBaseScripts\Procedures\App\FAQ\app.spGetsFaq.sql" />
     <Content Include="DataBaseScripts\Procedures\App\FAQ\app.spModifyFaq.sql" />
     <Content Include="DataBaseScripts\Procedures\App\Product\app.spGetProduct.sql" />
+    <Content Include="DataBaseScripts\Procedures\App\Product\app.spGetsProductBySellingProductType.sql" />
+    <Content Include="DataBaseScripts\Procedures\App\Product\app.spGetsProductByProductType.sql" />
     <Content Include="DataBaseScripts\Procedures\App\Product\app.spGetsProductForHomePage.sql" />
     <Content Include="DataBaseScripts\Procedures\App\Product\app.spGetsProduct.sql" />
     <Content Include="DataBaseScripts\Procedures\App\Product\app.spModifyProduct.sql" />

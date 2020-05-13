@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarAhora">
-        <a class="navbar-brand" href="@Url.RouteUrl("Home")">نام فروشگاه شما</a>
+        <a class="navbar-brand" href="@Url.RouteUrl("Home")">@Helper.SiteName</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             @RenderMenu(Model)
         </ul>

@@ -75,7 +75,7 @@ namespace FM.Portal.Infrastructure.DAL
                             obj.HasSwimmingPool = SQLHelper.CheckBoolNull(dr["HasSwimmingPool"]);
                             obj.CountParking = SQLHelper.CheckIntNull(dr["CountParking"]);
                             obj.YearOfConstruction = SQLHelper.CheckStringNull(dr["YearOfConstruction"]);
-
+                            obj.Enabled = SQLHelper.CheckBoolNull(dr["Enabled"]);
                         }
                     }
 
@@ -111,6 +111,30 @@ namespace FM.Portal.Infrastructure.DAL
                 param[5].Value = listVM.ProductType != ProductType.نامشخص ? (object)listVM.ProductType : DBNull.Value;
 
                 return SQLHelper.GetDataTable(CommandType.StoredProcedure, "app.spGetsProduct", param);
+            }
+            catch (Exception e) { throw; }
+        }
+
+        public DataTable ListByProductType(ProductType type, int count)
+        {
+            try
+            {
+                var param = new SqlParameter[2];
+                param[0] = new SqlParameter("@ProductType", (byte)type);
+                param[1] = new SqlParameter("@count", count);
+                return SQLHelper.GetDataTable(CommandType.StoredProcedure, "app.spGetsProductByProductType", param);
+            }
+            catch (Exception e) { throw; }
+        }
+
+        public DataTable ListBySellingProductType(SellingProductType type, int count)
+        {
+            try
+            {
+                var param = new SqlParameter[2];
+                param[0] = new SqlParameter("@SellingProductType", (byte)type);
+                param[1] = new SqlParameter("@count", count);
+                return SQLHelper.GetDataTable(CommandType.StoredProcedure, "app.spGetsProductBySellingProductType", param);
             }
             catch (Exception e) { throw; }
         }

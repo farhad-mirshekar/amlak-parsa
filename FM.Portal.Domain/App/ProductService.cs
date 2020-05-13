@@ -48,6 +48,24 @@ namespace FM.Portal.Domain
             return Result<List<Product>>.Failure();
         }
 
+        public Result<List<ShowProductOnHomePageListVM>> ListByProductType(ProductType type, int? count)
+        {
+            count = count ?? 4;
+            var table = ConvertDataTableToList.BindList<ShowProductOnHomePageListVM>(_dataSource.ListByProductType(type , count.Value));
+            if (table.Count > 0 || table.Count == 0)
+                return Result<List<ShowProductOnHomePageListVM>>.Successful(data: table);
+            return Result<List<ShowProductOnHomePageListVM>>.Failure();
+        }
+
+        public Result<List<ShowProductOnHomePageListVM>> ListBySellingProductType(SellingProductType type, int? count)
+        {
+            count = count ?? 4;
+            var table = ConvertDataTableToList.BindList<ShowProductOnHomePageListVM>(_dataSource.ListBySellingProductType(type, count.Value));
+            if (table.Count > 0 || table.Count == 0)
+                return Result<List<ShowProductOnHomePageListVM>>.Successful(data: table);
+            return Result<List<ShowProductOnHomePageListVM>>.Failure();
+        }
+
         public Result<List<ShowProductOnHomePageListVM>> ListForWeb(ProductListVM listVM, int Count)
         {
             var table = ConvertDataTableToList.BindList<ShowProductOnHomePageListVM>(_dataSource.ListForWeb(listVM,Count));

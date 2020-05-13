@@ -1,8 +1,9 @@
-﻿@model List<ShowProductOnHomePageListVM>
+﻿@model PagedList.IPagedList<ShowProductOnHomePageListVM>
+@using PagedList.Mvc;
 <section class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <span class="card-title">آگهی های مربوط به مغازه</span>
+            <span class="card-title">آگهی های مربوط به خانه</span>
         </div>
         <div class="card-body">
             <div class="container">
@@ -22,11 +23,7 @@
                                     </div>
                                     <div class="">
                                         <i class="fa fa-sellsy"></i>
-                                        <a href="@Url.RouteUrl("SellingProduct",new { Type = item.SellingProductType })">@item.SellingProductType.ToString().Replace('_', ' ')</a>
-                                    </div>
-                                    <div class="">
-                                        <i class="fa fa-sellsy"></i>
-                                        <a href="@Url.RouteUrl("DocumentProduct",new { Type = item.ProductType})">@item.ProductType.ToString().Replace('_', ' ')</a>
+                                        <a href="@Url.RouteUrl("SellingProduct",new { Type = item.SellingProductType , Seo=item.SellingProductType.ToString()})">@item.SellingProductType.ToString().Replace('_', ' ')</a>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -38,6 +35,11 @@
                         </div>
                     }
                 </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center" dir="ltr">
+                @Html.PagedListPager(Model, page => Url.Action("Buy", new { page }))
             </div>
         </div>
     </div>

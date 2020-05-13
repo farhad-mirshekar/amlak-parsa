@@ -8,11 +8,17 @@ namespace Project.WebApp
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
             routes.MapRoute(
-               "Download-File-Zip",
-               "Download/File/{Token}",
-               new { controller = "Download", action = "FileZip", Name = UrlParameter.Optional },
-               namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" });
+                "SellingProduct",
+                "Buy/{Type}",
+                new { controller = "Product", action = "Buy", Type = UrlParameter.Optional },
+                namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" });
+            routes.MapRoute(
+                "DocumentProduct",
+                "ProductType/{Type}",
+                new { controller = "Product", action = "ProductType", Type = UrlParameter.Optional },
+                namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" });
             routes.MapRoute(
                 "Tag",
                 "Tag/{Name}",
@@ -66,37 +72,6 @@ namespace Project.WebApp
               new { controller = "Article", action = "Detail", TrackingCode = UrlParameter.Optional, Seo = UrlParameter.Optional },
               namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
               );
-
-            routes.MapRoute(
-               "Category",
-               "Category/{title}/{ID}",
-               new { controller = "Category", action = "Index" },
-               namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
-               );
-            routes.MapRoute(
-               "CartEmpty",
-               "CartEmpty",
-               new { controller = "ShoppingCart", action = "CartEmpty" },
-               namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
-               );
-            routes.MapRoute(
-               "Shopping",
-               "Shopping",
-               new { controller = "ShoppingCart", action = "Shopping" },
-               namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
-               );
-            routes.MapRoute(
-                "Cart",
-                "Cart",
-                new { controller = "ShoppingCart", action = "Index" },
-                namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
-                );
-            routes.MapRoute(
-                "AddToCart",
-                "product/AddToCart/{ProductID}",
-                new { controller = "Product", action = "AddToCart", ProductID = UrlParameter.Optional },
-                namespaces: new[] { $"{typeof(RouteConfig).Namespace}.Controllers" }
-                );
             routes.MapRoute(
                 "product",
                 "product/{TrackingCode}/{Title}",

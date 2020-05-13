@@ -12,5 +12,7 @@ namespace FM.Portal.DataSource
         Result<Product> Get(Guid? ID , string TrackingCode);
         DataTable List(ProductListVM listVM);
         DataTable ListForWeb(ProductListVM listVM, int? Count);
+        DataTable ListBySellingProductType(SellingProductType type, int count);
+        DataTable ListByProductType(ProductType type, int count);
     }
 }

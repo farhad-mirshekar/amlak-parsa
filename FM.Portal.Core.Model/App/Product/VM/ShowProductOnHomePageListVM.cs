@@ -9,5 +9,6 @@
         public ProvinceType ProvinceType { get; set; }
         public string SectionName { get; set; }
         public SellingProductType SellingProductType { get; set; }
+        public ProductType ProductType { get; set; }
     }
 }

@@ -1740,6 +1740,8 @@
     <Content Include="Views\Shared\_PartialSideEvents.cshtml" />
     <Content Include="Views\Shared\_PartialSideNews.cshtml" />
     <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Product\Buy.cshtml" />
+    <Content Include="Views\Product\ProductType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

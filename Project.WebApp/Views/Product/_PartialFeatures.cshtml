@@ -40,6 +40,72 @@
                             Positivefeatures = false;
                             <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>تلفن</li>
                         }
+
+                        @if (Model.HasAirConditioning.HasValue && Model.HasAirConditioning.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>تهویه مطبوع</li>
+                        }
+                        @if (Model.HasBalcony.HasValue && Model.HasBalcony.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>بالکن</li>
+                        }
+                        @if (Model.HasCentralAntenna.HasValue && Model.HasCentralAntenna.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>آنتن مرکزی</li>
+                        }
+                        @if (Model.HasConferenceHall.HasValue && Model.HasConferenceHall.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>سالن کنفرانس</li>
+                        }
+                        @if (Model.HasGuard.HasValue && Model.HasGuard.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>نگهبان</li>
+                        }
+                        @if (Model.HasPhone.HasValue && Model.HasPhone.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>تلفن</li>
+                        }
+                        @if (Model.HasLobby.HasValue && Model.HasLobby.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>بالکن</li>
+                        }
+                        @if (Model.HasParking.HasValue && Model.HasParking.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>پارکینگ</li>
+                        }
+                        @if (Model.HasRemoteDoor.HasValue && Model.HasRemoteDoor.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>درب ریموت</li>
+                        }
+                        @if (Model.HasSportsHall.HasValue && Model.HasSportsHall.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>سالن ورزش</li>
+                        }
+                        @if (Model.HasSwimmingPool.HasValue && Model.HasSwimmingPool.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>استخر</li>
+                        }
+                        @if (Model.HasJacuzzi.HasValue && Model.HasJacuzzi.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>جکوزی</li>
+                        }
+                        @if (Model.HasSauna.HasValue && Model.HasSauna.Value)
+                        {
+                            Positivefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-success m-1"></i>سونا</li>
+                        }
                         @if (Positivefeatures)
                         {
                             <li class="list-group-item">ندارد</li>
@@ -84,6 +150,74 @@
                             Negativefeatures = false;
                             <li class="list-group-item"><i class="fa fa-times text-danger m-1"></i>تلفن</li>
                         }
+
+
+                        @if (!Model.HasAirConditioning.HasValue && !Model.HasAirConditioning.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>تهویه مطبوع</li>
+                        }
+                        @if (!Model.HasBalcony.HasValue && !Model.HasBalcony.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>بالکن</li>
+                        }
+                        @if (!Model.HasCentralAntenna.HasValue && !Model.HasCentralAntenna.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>آنتن مرکزی</li>
+                        }
+                        @if (!Model.HasConferenceHall.HasValue && !Model.HasConferenceHall.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>سالن کنفرانس</li>
+                        }
+                        @if (!Model.HasGuard.HasValue && !Model.HasGuard.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>نگهبان</li>
+                        }
+                        @if (!Model.HasPhone.HasValue && !Model.HasPhone.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>تلفن</li>
+                        }
+                        @if (!Model.HasLobby.HasValue && !Model.HasLobby.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>بالکن</li>
+                        }
+                        @if (!Model.HasParking.HasValue && !Model.HasParking.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>پارکینگ</li>
+                        }
+                        @if (!Model.HasRemoteDoor.HasValue && !Model.HasRemoteDoor.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>درب ریموت</li>
+                        }
+                        @if (!Model.HasSportsHall.HasValue && !Model.HasSportsHall.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>سالن ورزش</li>
+                        }
+                        @if (!Model.HasSwimmingPool.HasValue && !Model.HasSwimmingPool.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>استخر</li>
+                        }
+                        @if (!Model.HasJacuzzi.HasValue && !Model.HasJacuzzi.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>جکوزی</li>
+                        }
+                        @if (!Model.HasSauna.HasValue && !Model.HasSauna.Value)
+                        {
+                            Negativefeatures = false;
+                            <li class="list-group-item"><i class="fa fa-check text-danger m-1"></i>سونا</li>
+                        }
+
                         @if (Negativefeatures)
                         {
                             <li class="list-group-item">ندارد</li>

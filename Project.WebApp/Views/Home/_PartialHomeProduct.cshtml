@@ -22,7 +22,11 @@
                                     </div>
                                     <div class="">
                                         <i class="fa fa-sellsy"></i>
-                                        <label class="control-label">@item.SellingProductType.ToString().Replace('_',' ')</label>
+                                        <a href="@Url.RouteUrl("SellingProduct",new { Type = item.SellingProductType })">@item.SellingProductType.ToString().Replace('_', ' ')</a>
+                                    </div>
+                                    <div class="">
+                                        <i class="fa fa-sellsy"></i>
+                                        <a href="@Url.RouteUrl("DocumentProduct",new { Type = item.ProductType})">@item.ProductType.ToString().Replace('_', ' ')</a>
                                     </div>
                                 </div>
                                 <div class="card-footer">

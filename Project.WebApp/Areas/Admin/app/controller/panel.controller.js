@@ -38,13 +38,13 @@
         faqgroup.main = {};
         faqgroup.main.changeState = {
             cartable: cartable,
-            edit: edit
+            edit: edit,
+            add:add
         };
         faqgroup.addFaqGroup = addFaqGroup;
         faqgroup.editFaqGroup = editFaqGroup;
         faqgroup.select = select;
         faqgroup.openModalFaq = openModalFaq;
-        faqgroup.goToPageAdd = goToPageAdd;
         faqgroup.grid = {
             bindingObject: faqgroup
             , columns: [{ name: 'Title', displayName: 'دسته بندی سوال' }]
@@ -55,27 +55,48 @@
         init();
         function init() {
             loadingService.show();
-            switch ($routeParams.state) {
-                case 'cartable':
-                    cartable();
-                    loadingService.hide();
-                    break;
-                case 'add':
-                    faqgroup.state = 'add';
-                    loadingService.hide();
-                    break;
-                case 'edit':
-                    faqgroup.state = 'edit';
-                    faqGroupService.get($routeParams.id).then((result) => {
-                        edit(result);
-                    })
-                    loadingService.hide();
-                    break;
-            }
+            return $q.resolve().then(() => {
+                switch ($routeParams.state) {
+                    case 'cartable':
+                        faqgroup.main.changeState.cartable();
+                        break;
+                    case 'add':
+                        faqgroup.main.changeState.add();
+                        break;
+                    case 'edit':
+                        faqgroup.state = 'edit';
+                        faqGroupService.get($routeParams.id).then((result) => {
+                            edit(result);
+                        })
+                        break;
+                }
+            }).finally(loadingService.hide);
         }
-        function goToPageAdd() {
+        function cartable() {
+            loadingService.show();
+            faqgroup.Model = {};
+            faqgroup.state = 'cartable';
+            $location.path('faq-group/cartable');
+            loadingService.hide();
+        }
+        function edit(model) {
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return faqService.list(model.ID);
+            }).then((result) => {
+                faqgroup.faq = result;
+                faqgroup.state = 'edit';
+                faqgroup.Model = model;
+                $location.path(`faq-group/edit/${faqgroup.Model.ID}`);
+            }).finally(loadingService.hide);
+        }
+        function add() {
+            loadingService.show();
+            faqgroup.state = 'add';
             $location.path('/faq-group/add');
+            loadingService.hide();
         }
+
         function addFaqGroup() {
             loadingService.show();
             return faqGroupService.add(faqgroup.Model).then((result) => {
@@ -98,22 +119,6 @@
                 $timeout(function () {
                     cartable();
                 }, 1000);
-            }).finally(loadingService.hide);
-        }
-        function cartable() {
-            faqgroup.Model = {};
-            faqgroup.state = 'cartable';
-            $location.path('faq-group/cartable');
-        }
-        function edit(model) {
-            loadingService.show();
-            return $q.resolve().then(() => {
-                return faqService.list(model.ID);
-            }).then((result) => {
-                faqgroup.faq = result;
-                faqgroup.state = 'edit';
-                faqgroup.Model = model;
-                $location.path(`faq-group/edit/${faqgroup.Model.ID}`);
             }).finally(loadingService.hide);
         }
         function openModalFaq() {

@@ -153,15 +153,16 @@ div.comment-container li {
 }
 
     #product-description > p {
-        margin-top:30px;
-        font-size:20px;
-        color:red;
+        margin-top: 30px;
+        font-size: 20px;
+        color: red;
     }
 
     #product-description > ul {
         list-style-type: circle;
         line-height: 30px;
     }
+
 .c-params__list {
     list-style: none;
     padding: 0;
@@ -180,6 +181,13 @@ div.comment-container li {
 .c-params__list-key, .c-params__list-value {
     padding-right: 8px;
     padding-left: 8px;
+    flex: 0 0 22.2%;
+}
+
+.c-params__list-value {
+    padding-right: 8px;
+    padding-left: 8px;
+    flex: 0 0 77.8%;
 }
 
     .c-params__list-key .block, .c-params__list-value .block {
@@ -193,6 +201,7 @@ div.comment-container li {
         min-height: 47px;
         position: relative;
     }
+
 #fullDesc {
     margin-top: 15px;
 }
@@ -218,14 +227,16 @@ div.comment-container li {
     background-color: rgba(135, 150, 165, .25);
     cursor: pointer;
 }
-.faq-item:hover {
-    background-color: rgba(135, 150, 165, .40);
-    cursor:pointer;
-}
-.faq-item > span{
-    color:blue;
-    font-size:16px;
-}
+
+    .faq-item:hover {
+        background-color: rgba(135, 150, 165, .40);
+        cursor: pointer;
+    }
+
+    .faq-item > span {
+        color: blue;
+        font-size: 16px;
+    }
 /**************************End Css Faq**********************/
 #load {
     display: none;
