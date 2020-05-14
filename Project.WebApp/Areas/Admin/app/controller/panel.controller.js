@@ -169,64 +169,6 @@
         }
     }
     //-------------------------------------------------------------------------------------------------------
-    app.controller('faqController', faqController);
-    faqController.$inject = ['$scope', '$uibModalInstance', '$timeout', 'toaster', 'loadingService', 'faqgroup', 'faqService', '$window', 'faqmodel', '$q'];
-    function faqController($scope, $uibModalInstance, $timeout, toaster, loadingService, faqgroup, faqService, $window, faqmodel, $q) {
-        let faq = $scope;
-        faq.cancel = cancel;
-        faq.add = add;
-        faq.edit = edit;
-        faq.state = 'addd';
-        if (faqmodel === null) {
-            faq.state = 'add';
-            faq.Model = {};
-        }
-        else {
-            faq.Model = faqmodel;
-            faq.state = 'edit';
-        }
-
-        faq.faqgroup = faqgroup;
-        function add() {
-            loadingService.show();
-            faq.Model.FAQGroupID = faqgroup.ID;
-            return $q.resolve().then(() => {
-                return faqService.add(faq.Model);
-            }).then(() => {
-                toaster.pop('success', '', 'تغییرات با موفقیت انجام گردید');
-                $timeout(function () {
-                    cancel();
-                }, 100);
-                $timeout(function () {
-                    $window.location.reload();
-                }, 100);
-            }).catch((error) => {
-                toaster.pop('error', "", "مشکلی اتفاق افتاده است");
-            }).finally(loadingService.hide);
-        }
-        function edit() {
-            faq.Model.FAQGroupID = faqgroup.ID;
-            loadingService.show();
-            return $q.resolve().then(() => {
-                return faqService.edit(faq.Model);
-            }).then(() => {
-                toaster.pop('success', '', 'تغییرات با موفقیت انجام گردید');
-                $timeout(function () {
-                    cancel();
-                }, 1000);
-                $timeout(function () {
-                    $window.location.reload();
-                }, 100);
-            }).catch((error) => {
-                toaster.pop('error', "", "مشکلی اتفاق افتاده است");
-            }).finally(loadingService.hide);
-        }
-        function cancel() {
-            $uibModalInstance.dismiss();
-        }
-
-    }
-    //-------------------------------------------------------------------------------------------------------
     app.controller('profileController', profileController);
     profileController.$inject = ['$scope', 'profileService'];
     function profileController($scope, profileService) {
@@ -249,17 +191,43 @@
         command.Model = {};
         command.list = [];
         command.lists = [];
-        command.state = 'cartable';
-        command.goToPageAdd = goToPageAdd;
+        command.state = '';
+
         command.addCommand = addCommand;
         command.addSubCommand = addSubCommand;
         command.editCommand = editCommand;
         command.commandType = toolsService.arrayEnum(enumService.CommandsType);
         command.changeState = {
-            cartable: cartable
+            cartable: cartable,
+            add:add
         }
         init();
-
+        command.tree = {
+            data: []
+            , colDefs: [
+                { field: 'Name', displayName: 'عنوان انگلیسی' }
+                , { field: 'Title', displayName: 'نام مجوز' }
+                , {
+                    field: ''
+                    , displayName: ''
+                    , cellTemplate: (
+                        `<div class='pull-left'>
+                            <i class='fa fa-plus tgrid-action pl-1 text-success' style='cursor:pointer;' ng-click='cellTemplateScope.add(row.branch)' title='افزودن'></i>
+                            <i class='fa fa-pencil tgrid-action pl-1 text-primary' style='cursor:pointer;' ng-click='cellTemplateScope.edit(row.branch)' title='ویرایش'></i>
+                            <i class='fa fa-trash tgrid-action pl-1 text-danger' style='cursor:pointer;' ng-click='cellTemplateScope.remove(row.branch)' title='حذف'></i>
+                        </div>`)
+                    , cellTemplateScope: {
+                        edit: edit,
+                        add: addSubCommand,
+                        remove: remove
+                    }
+                }
+            ]
+            , expandingProperty: {
+                field: "Title"
+                , displayName: "عنوان"
+            }
+        };
         function init() {
             loadingService.show();
             $q.resolve().then(() => {
@@ -284,36 +252,9 @@
         } // end init
 
         function cartable() {
-            command.tree = {
-                data: []
-                , colDefs: [
-                    { field: 'Name', displayName: 'عنوان انگلیسی' }
-                    , { field: 'Title', displayName: 'نام مجوز' }
-                    , {
-                        field: ''
-                        , displayName: ''
-                        , cellTemplate: (
-                            `<div class='pull-left'>
-                            <i class='fa fa-plus tgrid-action pl-1 text-success' style='cursor:pointer;' ng-click='cellTemplateScope.add(row.branch)' title='افزودن'></i>
-                            <i class='fa fa-pencil tgrid-action pl-1 text-primary' style='cursor:pointer;' ng-click='cellTemplateScope.edit(row.branch)' title='ویرایش'></i>
-                            <i class='fa fa-trash tgrid-action pl-1 text-danger' style='cursor:pointer;' ng-click='cellTemplateScope.remove(row.branch)' title='حذف'></i>
-                        </div>`)
-                        , cellTemplateScope: {
-                            edit: edit,
-                            add: addSubCommand,
-                            remove: remove
-                        }
-                    }
-                ]
-                , expandingProperty: {
-                    field: "Title"
-                    , displayName: "عنوان"
-                }
-            };
             commandService.list().then((result) => {
                 setTreeObject(result);
             });
-            command.state = 'cartable';
             $location.path('command/cartable');
         }
         function edit(parent) {
@@ -325,28 +266,28 @@
                 return commandService.listByNode({ Node: result.ParentNode });
             }).then((result) => {
                 command.Model.ParentID = result[0].ID;
-                $location.path(`/command/edit/${command.Model.ID}`);
                 command.state = 'edit';
+                $('#command-modal').modal('show');
             }).finally(loadingService.hide)
         }
-        function goToPageAdd(parent) {
+        function add(parent) {
             loadingService.show();
             parent = parent || {};
-            command.state = 'add';
             command.Model = { ParentID: parent.ID };
-            $location.path('/command/add');
+            command.state = 'add';
+            $('#command-modal').modal('show');
             loadingService.hide();
         }
+
         function addCommand() {
             command.Model.Name = command.Model.FullName;
             loadingService.show();
             return $q.resolve().then(() => {
                 commandService.add(command.Model).then((result) => {
                     toaster.pop('success', '', 'مجوز جدید با موفقیت اضافه گردید');
+                    $('#command-modal').modal('hide');
+                    command.changeState.cartable();
                     loadingService.hide();
-                    $timeout(function () {
-                        cartable();
-                    }, 1000);
                 })
             }).catch((error) => {
                 toaster.pop('error', '', 'خطای ناشناخته');
@@ -359,17 +300,15 @@
                 commandService.edit(command.Model).then((result) => {
                     toaster.pop('success', '', 'مجوز جدید با موفقیت اضافه گردید');
                     loadingService.hide();
-                    $timeout(function () {
-                        cartable();
-                    }, 1000);
+                    $('#command-modal').modal('hide');
+                    command.changeState.cartable();
                 })
             }).catch((error) => {
                 toaster.pop('error', '', 'خطای ناشناخته');
             }).finally(loadingService.hide);
         }
         function addSubCommand(parent) {
-            command.state = 'add';
-            goToPageAdd(parent);
+            command.changeState.add(parent);
         }
         function setTreeObject(commands) {
             commands.map((item) => {
