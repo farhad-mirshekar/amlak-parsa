@@ -91,3 +91,6 @@ ADD HasCentralAntenna BIT NULL
 
 ALTER TABLE app.Product
 ADD YearOfConstruction Nvarchar(1000)
+
+ALTER TABLE pbl.Menu
+ADD Parameters NVARCHAR(MAX) NULL
