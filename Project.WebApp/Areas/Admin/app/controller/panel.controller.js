@@ -29,12 +29,14 @@
     }
     //-------------------------------------------------------------------------------------------------------
     app.controller('faqGroupController', faqGroupController);
-    faqGroupController.$inject = ['$scope', '$routeParams', '$location', '$uibModal', 'toaster', 'loadingService', 'faqGroupService', 'faqService', '$q', '$timeout'];
-    function faqGroupController($scope, $routeParams, $location, $uibModal, toaster, loadingService, faqGroupService, faqService, $q, $timeout) {
+    faqGroupController.$inject = ['$scope', '$routeParams', '$location', 'toaster', 'loadingService', 'faqGroupService', 'faqService', '$q', '$timeout'];
+    function faqGroupController($scope, $routeParams, $location, toaster, loadingService, faqGroupService, faqService, $q, $timeout) {
         let faqgroup = $scope;
         faqgroup.state = '';
         faqgroup.Model = {};
         faqgroup.faq = {};
+        faqgroup.faq.Model = {};
+        faqgroup.faq.state = '';
         faqgroup.main = {};
         faqgroup.main.changeState = {
             cartable: cartable,
@@ -45,6 +47,8 @@
         faqgroup.editFaqGroup = editFaqGroup;
         faqgroup.select = select;
         faqgroup.openModalFaq = openModalFaq;
+        faqgroup.addFaq = addFaq;
+        faqgroup.editFaq = editFaq;
         faqgroup.grid = {
             bindingObject: faqgroup
             , columns: [{ name: 'Title', displayName: 'دسته بندی سوال' }]
@@ -74,13 +78,14 @@
         }
         function cartable() {
             loadingService.show();
-            faqgroup.Model = {};
+            clearModel();
             faqgroup.state = 'cartable';
             $location.path('faq-group/cartable');
             loadingService.hide();
         }
         function edit(model) {
             loadingService.show();
+            faqgroup.faq = {};
             return $q.resolve().then(() => {
                 return faqService.list(model.ID);
             }).then((result) => {
@@ -103,9 +108,7 @@
                 faqgroup.grid.getlist(false);
                 toaster.pop('success', '', 'تغییرات با موفقیت انجام گردید');
                 faqgroup.Model = result;
-                $timeout(function () {
-                    cartable();
-                }, 1000);
+                faqgroup.main.changeState.edit(faqgroup.Model);
             }).finally(loadingService.hide);
         }
         function editFaqGroup() {
@@ -122,31 +125,47 @@
             }).finally(loadingService.hide);
         }
         function openModalFaq() {
-
-            var modalInstanse = $uibModal.open({
-                templateUrl: 'faq.html',
-                controller: 'faqController',
-                size: 'lg',
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                resolve: {
-                    faqgroup: () => { return faqgroup.Model; },
-                    faqmodel: () => { return null; }
-                }
-            })
+            faqgroup.faq.Model = {};
+            faqgroup.faq.state = 'add';
+            $(".grid-faq").modal("show");
         }
         function select(model) {
-            var modalInstanse = $uibModal.open({
-                templateUrl: 'faq.html',
-                controller: 'faqController',
-                size: 'lg',
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                resolve: {
-                    faqgroup: () => { return faqgroup.Model; },
-                    faqmodel: () => { return angular.copy(model); }
-                }
-            })
+            faqgroup.faq.state = 'edit';
+            faqgroup.faq.Model = angular.copy(model);
+            $(".grid-faq").modal("show");
+        }
+
+        function addFaq() {
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return faqService.add(faqgroup.faq.Model);
+            }).then(() => {
+                toaster.pop('success', '', 'سوال با موفقیت ثبت گردید');
+                $timeout(function () {
+                    $('.grid-faq').modal('hide');
+                }, 100);
+
+            }).finally(loadingService.hide);
+        }
+        function editFaq() {
+            loadingService.show();
+            return $q.resolve().then(() => {
+                return faqService.edit(faqgroup.faq.Model);
+            }).then(() => {
+                return faqGroupService.get(faqgroup.Model.ID);
+            }).then((result) => {
+                return edit(result);
+            }).then(() => {
+                toaster.pop('success', '', 'سوال با موفقیت ویرایش گردید');
+                $timeout(function () {
+                    $('.grid-faq').modal('hide');
+                }, 100);
+            }).finally(loadingService.hide);
+        }
+        function clearModel() {
+            faqgroup.Model = {};
+            faqgroup.faq.Model = {};
+            faqgroup.faq.state = '';
         }
     }
     //-------------------------------------------------------------------------------------------------------
