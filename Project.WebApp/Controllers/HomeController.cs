@@ -43,7 +43,7 @@ namespace Project.WebApp.Controllers
             var result = _service.ListForWeb(new FM.Portal.Core.Model.ProductListVM {ProductType = FM.Portal.Core.Model.ProductType.خانه }, Helper.CountShowProduct);
             if (!result.Success)
                 return null;
-            return PartialView("_PartialHomeProduct", result.Data);
+            return PartialView("_PartialProduct", result.Data);
         }
         [ChildActionOnly]
         public virtual ActionResult ShopProduct()
@@ -51,7 +51,7 @@ namespace Project.WebApp.Controllers
             var result = _service.ListForWeb(new FM.Portal.Core.Model.ProductListVM { ProductType = FM.Portal.Core.Model.ProductType.مغازه }, Helper.CountShowProduct);
             if (!result.Success)
                 return null;
-            return PartialView("_PartialShopProduct", result.Data);
+            return PartialView("_PartialProduct", result.Data);
         }
 
         [ChildActionOnly]

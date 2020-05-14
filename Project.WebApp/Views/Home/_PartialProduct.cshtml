@@ -1,0 +1,114 @@
+﻿@model List<ShowProductOnHomePageListVM>
+<section class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">آگهی های مربوط به @Model.Select(x => x.ProductType).First().ToString().Replace('_', ' ')</span>
+            <a class="btn btn-outline-primary pull-left" href="@Url.RouteUrl("DocumentProduct",new { Type = Model.Select(x=>x.ProductType).First()})">بیشتر</a>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 d-flex align-items-stretch">
+                            <div class="card">
+                                <figure>
+                                    <img src="~/Content/TemporaryFiles/@Enum.GetName(typeof(PathType), item.PathType)/@item.FileName" alt="@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)" class="card-img-top img-rounded" />
+                                </figure>
+                                <div class="card-body">
+                                    <h5 class="card-title">@(item.Title.Length > 20 ? item.Title.Substring(0, 19) + " ...." : item.Title)</h5>
+                                    <div class="">
+                                        <i class="fa fa-map-marker"></i>
+                                        <label class="control-label">@item.ProvinceType.ToString().Replace('_', ' ')</label> -  <label class="control-label">@item.SectionName</label>
+                                    </div>
+                                    <div>
+                                        <ul class="category-features">
+                                            <li class="category-features-list">
+                                                <i class="fa fa-lightbulb-o"></i>
+                                                <a href="@Url.RouteUrl("SellingProduct",new { Type = item.SellingProductType })">@item.SellingProductType.ToString().Replace('_', ' ')</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="category-features">
+                                            <li class="category-features-list">
+                                                @if (item.HasElectricity.HasValue && item.HasElectricity.Value)
+                                                {
+                                                    <i class="fa fa-check text-success m-0"></i>
+                                                    <label class="control-label">برق</label>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check text-danger m-0"></i>
+                                                    <label class="control-label">برق</label>
+                                                }
+                                            </li>
+                                            <li class="category-features-list">
+                                                @if (item.HasElevator.HasValue && item.HasElevator.Value)
+                                                {
+                                                    <i class="fa fa-check text-success m-0"></i>
+                                                    <label class="control-label">آسانسور</label>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check text-danger m-0"></i>
+                                                    <label class="control-label">آسانسور</label>
+                                                }
+                                            </li>
+                                            <li class="category-features-list">
+                                                @if (item.HasGas.HasValue && item.HasGas.Value)
+                                                {
+                                                    <i class="fa fa-check text-success m-0"></i>
+                                                    <label class="control-label">گاز</label>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check text-danger m-0"></i>
+                                                    <label class="control-label">گاز</label>
+                                                }
+                                            </li>
+                                            <li class="category-features-list">
+                                                @if (item.HasWater.HasValue && item.HasWater.Value)
+                                                {
+                                                    <i class="fa fa-check text-success m-0"></i>
+                                                    <label class="control-label">آب</label>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check text-danger m-0"></i>
+                                                    <label class="control-label">آب</label>
+                                                }
+                                            </li>
+                                            <li class="category-features-list">
+                                                @if (item.HasPhone.HasValue && item.HasPhone.Value)
+                                                {
+                                                    <i class="fa fa-check text-success m-0"></i>
+                                                    <label class="control-label">تلفن</label>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-check text-danger m-0"></i>
+                                                    <label class="control-label">تلفن</label>
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-group-justified" style="float:left">
+                                        <a href="@Url.RouteUrl("product",new { TrackingCode=item.TrackingCode,Title=@FM.Portal.Core.Extention.ReadingTime.CalculateWordsCount.CleanSeoUrl(item.Title)})" class="btn btn-outline-primary">مشاهده</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
